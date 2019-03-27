@@ -61,7 +61,7 @@
                                         <Border Grid.Column="1" Background="{DynamicResource Accent}" Width="36" Height="36" Margin="8,0"
                                                 DataContext="{TemplateBinding LogoData}"
                                                 Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=inverse}">
-                                            <Path Data="{Binding}" Stretch="Fill" Fill="White" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            <Path Data="{Binding}" Stretch="Fill" Fill="White" Width="24" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Border>
 
                                         <!-- window system buttons-->
