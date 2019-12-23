@@ -12,9 +12,12 @@
 
                 <TextBlock Text="HEADING1" Style="{StaticResource Heading1}" Margin="0,0,0,8" />
                 <TextBlock Text="HEADING2" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
-                <TextBlock Text="title" Style="{StaticResource Title}" Margin="0,0,0,8"/>
+                <TextBlock Text="Title" Style="{StaticResource Title}" Margin="0,0,0,8"/>
+                <TextBlock Text="Small" Style="{StaticResource Small}" Margin="0,0,0,8"/>
                 <TextBlock Text="Normal" Margin="0,0,0,8"/>
-                <TextBlock Text="small" Style="{StaticResource Small}" Margin="0,0,0,8"/>
+                <TextBlock Text="Large" Style="{StaticResource Large}" Margin="0,0,0,8"/>
+                <TextBlock Text="ExtraLarge" Style="{StaticResource ExtraLarge}" Margin="0,0,0,8"/>
+                <TextBlock Text="ExtraExtraLarge" Style="{StaticResource ExtraExtraLarge}" Margin="0,0,0,8"/>
                 <TextBlock Text="EMPHASIS" Style="{StaticResource Emphasis}" Margin="0,0,0,8"/>
                 <TextBlock Text="Fixed" Style="{StaticResource Fixed}" Margin="0,0,0,32"/>
 

@@ -39,9 +39,13 @@
     <sys:Double x:Key="DefaultFontSize">13</sys:Double>
 
     <FontFamily x:Key="FixedFontFamily">Consolas</FontFamily>
-    <sys:Double x:Key="FixedFontSize">13.333</sys:Double>
+    <sys:Double x:Key="FixedFontSize">13</sys:Double>
 
-    <sys:Double x:Key="SmallFontSize">11</sys:Double>
+    <sys:Double x:Key="SmallFontSize">12</sys:Double>
+    <sys:Double x:Key="NormalFontSize">13</sys:Double>
+    <sys:Double x:Key="LargeFontSize">14</sys:Double>
+    <sys:Double x:Key="ExtraLargeFontSize">15</sys:Double>
+    <sys:Double x:Key="ExtraExtraLargeFontSize">16</sys:Double>
 
     <!-- layout margins -->
     <Thickness x:Key="RootMargin">-42,-8,-16,-16</Thickness>

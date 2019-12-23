@@ -58,8 +58,11 @@ namespace FirstFloor.ModernUI.Presentation
                     ThemeSource = uri;
                 }
             }, o => o is Uri || o is string);
-            LargeFontSizeCommand = new RelayCommand(o => FontSize = FontSize.Large);
             SmallFontSizeCommand = new RelayCommand(o => FontSize = FontSize.Small);
+            NormalFontSizeCommand = new RelayCommand(o => FontSize = FontSize.Normal);
+            LargeFontSizeCommand = new RelayCommand(o => FontSize = FontSize.Large);
+            ExtraLargeFontSizeCommand = new RelayCommand(o => FontSize = FontSize.ExtraLarge);
+            ExtraExtraLargeFontSizeCommand = new RelayCommand(o => FontSize = FontSize.ExtraExtraLarge);
             AccentColorCommand = new RelayCommand(o => {
                 if (o is Color) {
                     AccentColor = (Color)o;
@@ -137,11 +140,20 @@ namespace FirstFloor.ModernUI.Presentation
             var defaultFontSize = Application.Current.Resources[KeyDefaultFontSize] as double?;
              
             if (defaultFontSize.HasValue) {
-                return defaultFontSize.Value == 12D ? FontSize.Small : FontSize.Large;
+                switch (defaultFontSize.Value)
+                {
+                    case 12D: return FontSize.Small;
+                    case 13D: return FontSize.Normal;
+                    case 14D: return FontSize.Large;
+                    case 15D: return FontSize.ExtraLarge;
+                    case 16D: return FontSize.ExtraExtraLarge;
+                    default:
+                        break;
+                }
             }
 
-            // default large
-            return FontSize.Large;
+            // default normal
+            return FontSize.Normal;
         }
 
         private void SetFontSize(FontSize fontSize)
@@ -150,8 +162,31 @@ namespace FirstFloor.ModernUI.Presentation
                 return;
             }
 
-            Application.Current.Resources[KeyDefaultFontSize] = fontSize == FontSize.Small ? 12D : 13D;
-            Application.Current.Resources[KeyFixedFontSize] = fontSize == FontSize.Small ? 10.667D : 13.333D;
+            switch (fontSize)
+            {
+                case FontSize.Small:
+                    Application.Current.Resources[KeyDefaultFontSize] = 12D;
+                    Application.Current.Resources[KeyFixedFontSize] = 12D;
+                    break;
+                case FontSize.Normal:
+                    Application.Current.Resources[KeyDefaultFontSize] = 13D;
+                    Application.Current.Resources[KeyFixedFontSize] = 13D;
+                    break;
+                case FontSize.Large:
+                    Application.Current.Resources[KeyDefaultFontSize] = 14D;
+                    Application.Current.Resources[KeyFixedFontSize] = 14D;
+                    break;
+                case FontSize.ExtraLarge:
+                    Application.Current.Resources[KeyDefaultFontSize] = 15D;
+                    Application.Current.Resources[KeyFixedFontSize] = 15D;
+                    break;
+                case FontSize.ExtraExtraLarge:
+                    Application.Current.Resources[KeyDefaultFontSize] = 16D;
+                    Application.Current.Resources[KeyFixedFontSize] = 16D;
+                    break;
+                default:
+                    break;
+            }
 
             OnPropertyChanged("FontSize");
         }
@@ -202,13 +237,25 @@ namespace FirstFloor.ModernUI.Presentation
         /// </summary>
         public ICommand SetThemeCommand { get; private set; }
         /// <summary>
+        /// The command that sets the small font size.
+        /// </summary>
+        public ICommand SmallFontSizeCommand { get; private set; }
+        /// <summary>
         /// The command that sets the large font size.
+        /// </summary>
+        public ICommand NormalFontSizeCommand { get; private set; }
+        /// <summary>
+        /// The command that sets the small font size.
         /// </summary>
         public ICommand LargeFontSizeCommand { get; private set; }
         /// <summary>
         /// The command that sets the small font size.
         /// </summary>
-        public ICommand SmallFontSizeCommand { get; private set; }
+        public ICommand ExtraLargeFontSizeCommand { get; private set; }
+        /// <summary>
+        /// The command that sets the small font size.
+        /// </summary>
+        public ICommand ExtraExtraLargeFontSizeCommand { get; private set; }
         /// <summary>
         /// The command that sets the accent color.
         /// </summary>

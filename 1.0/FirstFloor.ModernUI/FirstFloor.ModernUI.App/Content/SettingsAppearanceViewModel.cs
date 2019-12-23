@@ -16,7 +16,10 @@ namespace FirstFloor.ModernUI.App.Content
         : NotifyPropertyChanged
     {
         private const string FontSmall = "small";
+        private const string FontNormal = "normal";
         private const string FontLarge = "large";
+        private const string FontExtraLarge = "xlarge";
+        private const string FontExtraExtraLarge = "xxlarge";
 
         private const string PaletteMetro = "metro";
         private const string PaletteWP = "windows phone";
@@ -77,7 +80,17 @@ namespace FirstFloor.ModernUI.App.Content
             this.themes.Add(new Link { DisplayName = "love", Source = new Uri("/ModernUIDemo;component/Assets/ModernUI.Love.xaml", UriKind.Relative) });
             this.themes.Add(new Link { DisplayName = "snowflakes", Source = new Uri("/ModernUIDemo;component/Assets/ModernUI.Snowflakes.xaml", UriKind.Relative) });
 
-            this.SelectedFontSize = AppearanceManager.Current.FontSize == FontSize.Large ? FontLarge : FontSmall;
+            switch (AppearanceManager.Current.FontSize)
+            {
+                case FontSize.Small: this.SelectedFontSize = FontSmall; break;
+                case FontSize.Normal: this.SelectedFontSize = FontNormal; break;
+                case FontSize.Large: this.SelectedFontSize = FontLarge; break;
+                case FontSize.ExtraLarge: this.SelectedFontSize = FontExtraLarge; break;
+                case FontSize.ExtraExtraLarge: this.SelectedFontSize = FontExtraExtraLarge; break;
+                default:
+                    break;
+            }
+
             SyncThemeAndColor();
 
             AppearanceManager.Current.PropertyChanged += OnAppearanceManagerPropertyChanged;
@@ -94,7 +107,8 @@ namespace FirstFloor.ModernUI.App.Content
 
         private void OnAppearanceManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "ThemeSource" || e.PropertyName == "AccentColor") {
+            if (e.PropertyName == "ThemeSource" || e.PropertyName == "AccentColor")
+            {
                 SyncThemeAndColor();
             }
         }
@@ -106,7 +120,7 @@ namespace FirstFloor.ModernUI.App.Content
 
         public string[] FontSizes
         {
-            get { return new string[] { FontSmall, FontLarge }; }
+            get { return new string[] { FontSmall, FontNormal, FontLarge, FontExtraLarge, FontExtraExtraLarge }; }
         }
 
         public string[] Palettes
@@ -124,7 +138,8 @@ namespace FirstFloor.ModernUI.App.Content
             get { return this.selectedPalette; }
             set
             {
-                if (this.selectedPalette != value) {
+                if (this.selectedPalette != value)
+                {
                     this.selectedPalette = value;
                     OnPropertyChanged("AccentColors");
 
@@ -138,7 +153,8 @@ namespace FirstFloor.ModernUI.App.Content
             get { return this.selectedTheme; }
             set
             {
-                if (this.selectedTheme != value) {
+                if (this.selectedTheme != value)
+                {
                     this.selectedTheme = value;
                     OnPropertyChanged("SelectedTheme");
 
@@ -153,11 +169,21 @@ namespace FirstFloor.ModernUI.App.Content
             get { return this.selectedFontSize; }
             set
             {
-                if (this.selectedFontSize != value) {
+                if (this.selectedFontSize != value)
+                {
                     this.selectedFontSize = value;
                     OnPropertyChanged("SelectedFontSize");
 
-                    AppearanceManager.Current.FontSize = value == FontLarge ? FontSize.Large : FontSize.Small;
+                    switch (value)
+                    {
+                        case FontSmall: AppearanceManager.Current.FontSize = FontSize.Small; break;
+                        case FontNormal: AppearanceManager.Current.FontSize = FontSize.Normal; break;
+                        case FontLarge: AppearanceManager.Current.FontSize = FontSize.Large; break;
+                        case FontExtraLarge: AppearanceManager.Current.FontSize = FontSize.ExtraLarge; break;
+                        case FontExtraExtraLarge: AppearanceManager.Current.FontSize = FontSize.ExtraExtraLarge; break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
@@ -167,7 +193,8 @@ namespace FirstFloor.ModernUI.App.Content
             get { return this.selectedAccentColor; }
             set
             {
-                if (this.selectedAccentColor != value) {
+                if (this.selectedAccentColor != value)
+                {
                     this.selectedAccentColor = value;
                     OnPropertyChanged("SelectedAccentColor");
 

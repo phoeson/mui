@@ -25,10 +25,34 @@
         <Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"/>
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
     </Style>
+    
+    <Style x:Key="Normal" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+    </Style>
+
+    <Style x:Key="Large" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource LargeFontSize}"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+    </Style>
+
+    <Style x:Key="ExtraLarge" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource ExtraLargeFontSize}"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+    </Style>
+
+    <Style x:Key="ExtraExtraLarge" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="{DynamicResource ExtraExtraLargeFontSize}"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+    </Style>
 
     <Style x:Key="Emphasis" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontSize" Value="{DynamicResource SmallFontSize}"/>
+        <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}"/>
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
     </Style>

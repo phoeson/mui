@@ -12,12 +12,25 @@ namespace FirstFloor.ModernUI.Presentation
     public enum FontSize
     {
         /// <summary>
+        /// Small fonts.
+        /// </summary>
+        Small,
+        /// <summary>
+        /// Normal fonts.
+        /// </summary>
+        Normal,
+        /// <summary>
         /// Large fonts.
         /// </summary>
         Large,
         /// <summary>
-        /// Small fonts.
+        /// ExtraLarge fonts.
         /// </summary>
-        Small
+        ExtraLarge,
+        /// <summary>
+        /// ExtraExtraLarge fonts.
+        /// </summary>
+        ExtraExtraLarge
+
     }
 }
