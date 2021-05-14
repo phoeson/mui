@@ -49,11 +49,12 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        
+
                         <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               Margin="{TemplateBinding Padding}">
-                            <controls:TransitioningContentControl Content="{TemplateBinding Content}"
+                            <!--<controls:TransitioningContentControl Content="{TemplateBinding Content}"-->
+                            <ContentPresenter Content="{TemplateBinding Content}"
                                                                   ContentTemplate="{TemplateBinding ContentTemplate}"
                                                                   ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                                                   Margin="{TemplateBinding Padding}" />
