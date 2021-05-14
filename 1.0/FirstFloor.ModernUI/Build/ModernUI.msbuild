@@ -98,9 +98,15 @@
     <!-- copy output to temp dir -->
     <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI\Bin\Release\FirstFloor.ModernUI.dll" DestinationFolder="$(TempDir)" />
     <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI\Bin\Release\FirstFloor.ModernUI.xml" DestinationFolder="$(TempDir)" />
+	<Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI\Bin\Release\zh-TW\FirstFloor.ModernUI.resources.dll" DestinationFolder="$(TempDir)\zh-TW" />
+	<Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI\Bin\Release\zh-CN\FirstFloor.ModernUI.resources.dll" DestinationFolder="$(TempDir)\zh-CN" />
+	<Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI\Bin\Release\ja-JP\FirstFloor.ModernUI.resources.dll" DestinationFolder="$(TempDir)\ja-JP" />
     <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.App\Bin\Release\ModernUIDemo.exe" DestinationFolder="$(TempDir)" />
     <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\FirstFloor.ModernUI.dll" DestinationFolder="$(TempDir)\net40" />
     <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\FirstFloor.ModernUI.xml" DestinationFolder="$(TempDir)\net40" />
+    <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\zh-TW\FirstFloor.ModernUI.resources.dll" DestinationFolder="$(TempDir)\net40\zh-TW" />
+	<Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\zh-CN\FirstFloor.ModernUI.resources.dll" DestinationFolder="$(TempDir)\net40\zh-CN" />
+	<Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\ja-JP\FirstFloor.ModernUI.resources.dll" DestinationFolder="$(TempDir)\net40\ja-JP" />
     <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\Microsoft.Windows.Shell.dll" DestinationFolder="$(TempDir)\net40" />
     
     <!-- include license files -->
