@@ -127,13 +127,16 @@ namespace FirstFloor.ModernUI.Windows.Controls
         private void OnSelectedSourceChanged(Uri oldValue, Uri newValue) 
         {
             // Uri "Page1.xaml#111" and "Page1#222" points to the same page, but with a different fragment
+            //Treat same uri with different fragment as different pages
             // Must remove the fragment to avoid believing we are on different pages.
-            Uri oldValueNoFragment = NavigationHelper.RemoveFragment(oldValue);
-            Uri newValueNoFragment = NavigationHelper.RemoveFragment(newValue); 
+            // Uri oldValueNoFragment = NavigationHelper.RemoveFragment(oldValue);
+            // Uri newValueNoFragment = NavigationHelper.RemoveFragment(newValue); 
 
             if (!this.isSelecting) {
                 // if old and new are equal, don't do anything
-                if (newValueNoFragment != null && newValueNoFragment.Equals(oldValueNoFragment)) {
+                // if (newValueNoFragment != null && newValueNoFragment.Equals(oldValueNoFragment)) {
+                if (newValue != null && newValue.Equals(oldValue))
+                {
                     return;
                 }
 
@@ -233,13 +236,15 @@ namespace FirstFloor.ModernUI.Windows.Controls
             LinkGroup selectedGroup = null;
             Link selectedLink = null;
 
-            Uri sourceNoFragment = NavigationHelper.RemoveFragment(this.SelectedSource);
+            //Treat same uri with different fragment as different pages
+            //Uri sourceNoFragment = NavigationHelper.RemoveFragment(this.SelectedSource);
 
             if (this.LinkGroups != null) {
                 // find the current select group and link based on the selected source
                 var linkInfo = (from g in this.LinkGroups
                                 from l in g.Links
-                                where l.Source == sourceNoFragment
+                                where l.Source == this.SelectedSource
+                                //where l.Source == sourceNoFragment
                                 select new {
                                     Group = g,
                                     Link = l
