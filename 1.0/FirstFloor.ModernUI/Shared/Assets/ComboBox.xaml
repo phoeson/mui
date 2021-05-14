@@ -37,6 +37,7 @@
 
     <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource WindowText}"/>
         <Setter Property="AllowDrop" Value="true"/>
         <Setter Property="MinWidth" Value="0"/>
         <Setter Property="MinHeight" Value="0"/>
