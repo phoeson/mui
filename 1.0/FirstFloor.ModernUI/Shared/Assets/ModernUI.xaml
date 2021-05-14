@@ -17,7 +17,6 @@
         <ResourceDictionary Source="ListBox.xaml" />
         <ResourceDictionary Source="ListView.xaml" />
         <ResourceDictionary Source="ModernProgressRingStyles.xaml" />
-        <ResourceDictionary Source="ModernWindowStyles.xaml" />
         <ResourceDictionary Source="MenuItem.xaml" />
         <ResourceDictionary Source="PasswordBox.xaml" />
         <ResourceDictionary Source="ProgressBar.xaml" />
