@@ -206,7 +206,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\DataGridCheckBoxColumn.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\DataGridComboBoxColumn.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\DataGridTextColumn.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\DpiAwareWindow.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\DpiInformation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\ModernButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\ModernDialog.cs" />
