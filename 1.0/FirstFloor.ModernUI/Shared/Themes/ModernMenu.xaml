@@ -50,6 +50,7 @@
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="true">
                                                         <Setter Property="Foreground" Value="{DynamicResource MenuTextHover}"/>
+                                                        <Setter Property="Cursor" Value="Hand"/>
                                                     </Trigger>
                                                     <Trigger Property="IsSelected" Value="true">
                                                         <Setter Property="Foreground" Value="{DynamicResource MenuTextSelected}"/>
@@ -94,6 +95,7 @@
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="true">
                                                         <Setter Property="Foreground" Value="{DynamicResource SubMenuTextHover}"/>
+                                                        <Setter Property="Cursor" Value="Hand"/>
                                                     </Trigger>
                                                     <Trigger Property="IsSelected" Value="true">
                                                         <Setter Property="Foreground" Value="{DynamicResource SubMenuTextSelected}"/>
