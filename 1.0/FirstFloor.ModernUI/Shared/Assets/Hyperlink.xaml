@@ -3,10 +3,11 @@
 
     <Style x:Key="{x:Type Hyperlink}" TargetType="{x:Type Hyperlink}">
         <Setter Property="Foreground" Value="{DynamicResource Hyperlink}"/>
-        <Setter Property="TextDecorations" Value="Underline"/>
+        <Setter Property="TextDecorations" Value="None"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="{DynamicResource HyperlinkHover}" />
+                <Setter Property="TextDecorations" Value="Underline"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource HyperlinkDisabled}"/>
