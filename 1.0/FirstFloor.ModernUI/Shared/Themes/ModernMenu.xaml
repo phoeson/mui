@@ -24,7 +24,7 @@
                         
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40" />
-                            <RowDefinition Height="16" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <ListBox ItemsSource="{TemplateBinding VisibleLinkGroups}"
@@ -32,9 +32,9 @@
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                                    <Setter Property="FontFamily" Value="Segoe UI Light" />
+                                    <!--<Setter Property="FontFamily" Value="Segoe UI" />-->
                                     <Setter Property="Foreground" Value="{DynamicResource MenuText}" />
-                                    <Setter Property="FontSize" Value="23"/>
+                                    <Setter Property="FontSize" Value="24"/>
                                     <Setter Property="HorizontalContentAlignment" Value="Center" />
                                     <Setter Property="VerticalContentAlignment" Value="Center" />
                                     <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
@@ -75,9 +75,8 @@
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                                    <Setter Property="FontFamily" Value="Segoe UI" />
+                                    <!--<Setter Property="FontFamily" Value="Segoe UI" />-->
                                     <Setter Property="Foreground" Value="{DynamicResource SubMenuText}" />
-                                    <Setter Property="FontSize" Value="11"/>
                                     <Setter Property="Margin" Value="0,0,12,0" />
                                     <Setter Property="HorizontalContentAlignment" Value="Center" />
                                     <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -89,7 +88,6 @@
                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                                     <TextBlock Text="{Binding DisplayName, Converter={StaticResource ToUpperConverter}}" TextAlignment="Center"/>
-                                                    <TextBlock Text="{Binding DisplayName, Converter={StaticResource ToUpperConverter}}" FontWeight="Bold" Visibility="Hidden" />
                                                 </Grid>
                                                 
                                                 <ControlTemplate.Triggers>
