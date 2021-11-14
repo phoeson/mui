@@ -27,6 +27,7 @@
         <ResourceDictionary Source="TextBox.xaml" />
         <ResourceDictionary Source="ToolTip.xaml" />
         <ResourceDictionary Source="TreeView.xaml" />
+        <ResourceDictionary Source="Expander.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- default accent colors and brushes -->
