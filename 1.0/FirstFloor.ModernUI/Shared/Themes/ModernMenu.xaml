@@ -15,15 +15,15 @@
                     <Grid>
                         <Grid.Resources>
                             <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
-                                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+                                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
                                 <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
-                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
                                 <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
                             </Style>
                         </Grid.Resources>
                         
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="40" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
