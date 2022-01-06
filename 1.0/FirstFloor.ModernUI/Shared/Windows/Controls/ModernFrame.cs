@@ -73,6 +73,12 @@ namespace FirstFloor.ModernUI.Windows.Controls
         private bool isResetSource;
 
         /// <summary>
+        /// Uris which should cache with fragment
+        /// Content of same uri with different shoud be cached as different object
+        /// </summary>
+        public List<Uri> UriCacheWithFragment = new List<Uri>();
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ModernFrame"/> class.
         /// </summary>
         public ModernFrame()
@@ -124,7 +130,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
             var oldValueNoFragment = NavigationHelper.RemoveFragment(oldValue);
             var newValueNoFragment = NavigationHelper.RemoveFragment(newValue, out newFragment);
 
-            if (newValueNoFragment != null && newValueNoFragment.Equals(oldValueNoFragment)) {
+            if (!this.UriCacheWithFragment.Contains(newValue) && newValueNoFragment != null && newValueNoFragment.Equals(oldValueNoFragment)) {
                 // fragment navigation
                 var args = new FragmentNavigationEventArgs {
                     Fragment = newFragment
@@ -198,7 +204,16 @@ namespace FirstFloor.ModernUI.Windows.Controls
                 // content is cached on uri without fragment
                 var newValueNoFragment = NavigationHelper.RemoveFragment(newValue);
 
-                if (navigationType == NavigationType.Refresh || !this.contentCache.TryGetValue(newValueNoFragment, out newContent)) {
+                if (this.UriCacheWithFragment.Contains(newValue))
+                {
+                    this.contentCache.TryGetValue(newValue, out newContent);
+                }
+                else
+                {
+                    this.contentCache.TryGetValue(newValueNoFragment, out newContent);
+                }
+
+                if (navigationType == NavigationType.Refresh || newContent == null) {
                     var localTokenSource = new CancellationTokenSource();
                     this.tokenSource = localTokenSource;
                     // load the content (asynchronous!)
@@ -230,7 +245,14 @@ namespace FirstFloor.ModernUI.Windows.Controls
                                 newContent = t.Result;
                                 if (ShouldKeepContentAlive(newContent)) {
                                     // keep the new content in memory
-                                    this.contentCache[newValueNoFragment] = newContent;
+                                    if (this.UriCacheWithFragment.Contains(newValue))
+                                    {
+                                        this.contentCache[newValue] = newContent;
+                                    }
+                                    else
+                                    {
+                                        this.contentCache[newValueNoFragment] = newContent;
+                                    }
                                 }
 
                                 SetContent(newValue, navigationType, newContent, false);
