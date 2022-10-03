@@ -16,16 +16,16 @@
     <tags>modern ui, metro, wpf</tags>
   </metadata>
   <files>
-    <file src="Output\Temp\FirstFloor.ModernUI.dll" target="lib\net45\FirstFloor.ModernUI.dll" />
-    <file src="Output\Temp\FirstFloor.ModernUI.XML" target="lib\net45\FirstFloor.ModernUI.XML" />
-    <file src="Output\Temp\zh-TW\FirstFloor.ModernUI.resources.dll" target="lib\net45\zh-TW\FirstFloor.ModernUI.resources.dll" />
-    <file src="Output\Temp\zh-CN\FirstFloor.ModernUI.resources.dll" target="lib\net45\zh-CN\FirstFloor.ModernUI.resources.dll" />
-    <file src="Output\Temp\ja-JP\FirstFloor.ModernUI.resources.dll" target="lib\net45\ja-JP\FirstFloor.ModernUI.resources.dll" />
-    <file src="Output\Temp\net40\FirstFloor.ModernUI.dll" target="lib\net40\FirstFloor.ModernUI.dll" />
+    <file src="Output\Temp\FirstFloor.ModernUI.dll" target="lib\net462\FirstFloor.ModernUI.dll" />
+    <file src="Output\Temp\FirstFloor.ModernUI.XML" target="lib\net462\FirstFloor.ModernUI.XML" />
+    <file src="Output\Temp\zh-TW\FirstFloor.ModernUI.resources.dll" target="lib\net462\zh-TW\FirstFloor.ModernUI.resources.dll" />
+    <file src="Output\Temp\zh-CN\FirstFloor.ModernUI.resources.dll" target="lib\net462\zh-CN\FirstFloor.ModernUI.resources.dll" />
+    <file src="Output\Temp\ja-JP\FirstFloor.ModernUI.resources.dll" target="lib\net462\ja-JP\FirstFloor.ModernUI.resources.dll" />
+    <!--<file src="Output\Temp\net40\FirstFloor.ModernUI.dll" target="lib\net40\FirstFloor.ModernUI.dll" />
     <file src="Output\Temp\net40\FirstFloor.ModernUI.XML" target="lib\net40\FirstFloor.ModernUI.XML" />
     <file src="Output\Temp\net40\zh-TW\FirstFloor.ModernUI.resources.dll" target="lib\net40\zh-TW\FirstFloor.ModernUI.resources.dll" />
     <file src="Output\Temp\net40\zh-CN\FirstFloor.ModernUI.resources.dll" target="lib\net40\zh-CN\FirstFloor.ModernUI.resources.dll" />
     <file src="Output\Temp\net40\ja-JP\FirstFloor.ModernUI.resources.dll" target="lib\net40\ja-JP\FirstFloor.ModernUI.resources.dll" />
-    <file src="Output\Temp\net40\Microsoft.Windows.Shell.dll" target="lib\net40\Microsoft.Windows.Shell.dll" />
+    <file src="Output\Temp\net40\Microsoft.Windows.Shell.dll" target="lib\net40\Microsoft.Windows.Shell.dll" /-->>
   </files>
 </package>

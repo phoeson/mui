@@ -49,7 +49,7 @@
       XmlFileName="$(BaseDir)\FirstFloor.ModernUI\FirstFloor.ModernUI.csproj"
       XPath="/ms:Project/ms:PropertyGroup/ms:AssemblyOriginatorKeyFile"
       Value="$(CertificateFilePath)" />
-    <XmlUpdate
+    <!--<XmlUpdate
       Namespace="http://schemas.microsoft.com/developer/msbuild/2003"
       Prefix="ms"
       XmlFileName="$(BaseDir)\FirstFloor.ModernUI.WPF4\FirstFloor.ModernUI.WPF4.csproj"
@@ -60,7 +60,7 @@
       Prefix="ms"
       XmlFileName="$(BaseDir)\FirstFloor.ModernUI.WPF4\FirstFloor.ModernUI.WPF4.csproj"
       XPath="/ms:Project/ms:PropertyGroup/ms:AssemblyOriginatorKeyFile"
-      Value="$(CertificateFilePath)" />
+      Value="$(CertificateFilePath)" />-->
   </Target>
 
   <Target Name="DisableSignAssembly" Condition="$(CertificateFilePath) != ''">
@@ -76,7 +76,7 @@
       XmlFileName="$(BaseDir)\FirstFloor.ModernUI\FirstFloor.ModernUI.csproj"
       XPath="/ms:Project/ms:PropertyGroup/ms:AssemblyOriginatorKeyFile"
       Value="" />
-    <XmlUpdate
+    <!--<XmlUpdate
       Namespace="http://schemas.microsoft.com/developer/msbuild/2003"
       Prefix="ms"
       XmlFileName="$(BaseDir)\FirstFloor.ModernUI.WPF4\FirstFloor.ModernUI.WPF4.csproj"
@@ -87,7 +87,7 @@
       Prefix="ms"
       XmlFileName="$(BaseDir)\FirstFloor.ModernUI.WPF4\FirstFloor.ModernUI.WPF4.csproj"
       XPath="/ms:Project/ms:PropertyGroup/ms:AssemblyOriginatorKeyFile"
-      Value="" />
+      Value="" />-->
   </Target>
   
   <Target Name="Compile" DependsOnTargets="EnableSignAssembly">
@@ -102,12 +102,12 @@
 	<Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI\Bin\Release\zh-CN\FirstFloor.ModernUI.resources.dll" DestinationFolder="$(TempDir)\zh-CN" />
 	<Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI\Bin\Release\ja-JP\FirstFloor.ModernUI.resources.dll" DestinationFolder="$(TempDir)\ja-JP" />
     <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.App\Bin\Release\ModernUIDemo.exe" DestinationFolder="$(TempDir)" />
-    <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\FirstFloor.ModernUI.dll" DestinationFolder="$(TempDir)\net40" />
+    <!--<Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\FirstFloor.ModernUI.dll" DestinationFolder="$(TempDir)\net40" />
     <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\FirstFloor.ModernUI.xml" DestinationFolder="$(TempDir)\net40" />
     <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\zh-TW\FirstFloor.ModernUI.resources.dll" DestinationFolder="$(TempDir)\net40\zh-TW" />
 	<Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\zh-CN\FirstFloor.ModernUI.resources.dll" DestinationFolder="$(TempDir)\net40\zh-CN" />
 	<Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\ja-JP\FirstFloor.ModernUI.resources.dll" DestinationFolder="$(TempDir)\net40\ja-JP" />
-    <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\Microsoft.Windows.Shell.dll" DestinationFolder="$(TempDir)\net40" />
+    <Copy SourceFiles="$(BaseDir)\FirstFloor.ModernUI.WPF4\Bin\Release\Microsoft.Windows.Shell.dll" DestinationFolder="$(TempDir)\net40" />-->
     
     <!-- include license files -->
     <Copy SourceFiles="$(BaseDir)\License.Icons.txt" DestinationFolder="$(TempDir)\License" />
@@ -131,7 +131,7 @@
     <!-- only take major,minor,build part of version-->
     <PropertyGroup>
       <FullVersion>%(AssemblyInfo.Version)</FullVersion>
-      <MuiVersion>$(FullVersion.Substring(0, $(FullVersion.LastIndexOf('.'))))</MuiVersion>
+      <MuiVersion>%(AssemblyInfo.Version)</MuiVersion>
     </PropertyGroup>
     
     <!-- insert the version number into the nuspec files -->
