@@ -145,7 +145,7 @@
     <value>ナビゲートできない {0}, リソース未指定</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>いいえ</value>
+    <value>ない</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>いい</value>
@@ -166,6 +166,6 @@
     <value>トークンの種類は不明です</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>は</value>
+    <value>はい</value>
   </data>
 </root>
