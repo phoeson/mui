@@ -2,30 +2,44 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>ModernUI.WPF</id>
-    <version>1.0.9</version>
+    <version>1.0.9.2</version>
     <title>ModernUI for WPF</title>
     <authors>First Floor Software</authors>
     <owners>First Floor Software</owners>
-    <licenseUrl>https://github.com/firstfloorsoftware/mui/blob/master/LICENSE.md</licenseUrl>
-    <iconUrl>http://firstfloorsoftware.com/media/github/mui/mui-icon.png</iconUrl>
+    <!--<license type="file">Output\Temp\License\License.txt</license>-->
     <projectUrl>https://github.com/firstfloorsoftware/mui</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A set of controls and styles converting your WPF application into a great looking Modern UI app.</description>
     <summary />
     <copyright>Copyright 2013-2016 First Floor Software</copyright>
     <tags>modern ui, metro, wpf</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.2" />
+      <group targetFramework=".NETFramework4.7.2" />
+      <group targetFramework=".NETFramework4.8" />
+      <!--<group targetFramework="net6.0-windows" />-->
+    </dependencies>
   </metadata>
   <files>
-    <file src="Output\Temp\FirstFloor.ModernUI.dll" target="lib\net462\FirstFloor.ModernUI.dll" />
-    <file src="Output\Temp\FirstFloor.ModernUI.XML" target="lib\net462\FirstFloor.ModernUI.XML" />
-    <file src="Output\Temp\zh-TW\FirstFloor.ModernUI.resources.dll" target="lib\net462\zh-TW\FirstFloor.ModernUI.resources.dll" />
-    <file src="Output\Temp\zh-CN\FirstFloor.ModernUI.resources.dll" target="lib\net462\zh-CN\FirstFloor.ModernUI.resources.dll" />
-    <file src="Output\Temp\ja-JP\FirstFloor.ModernUI.resources.dll" target="lib\net462\ja-JP\FirstFloor.ModernUI.resources.dll" />
-    <!--<file src="Output\Temp\net40\FirstFloor.ModernUI.dll" target="lib\net40\FirstFloor.ModernUI.dll" />
-    <file src="Output\Temp\net40\FirstFloor.ModernUI.XML" target="lib\net40\FirstFloor.ModernUI.XML" />
-    <file src="Output\Temp\net40\zh-TW\FirstFloor.ModernUI.resources.dll" target="lib\net40\zh-TW\FirstFloor.ModernUI.resources.dll" />
-    <file src="Output\Temp\net40\zh-CN\FirstFloor.ModernUI.resources.dll" target="lib\net40\zh-CN\FirstFloor.ModernUI.resources.dll" />
-    <file src="Output\Temp\net40\ja-JP\FirstFloor.ModernUI.resources.dll" target="lib\net40\ja-JP\FirstFloor.ModernUI.resources.dll" />
-    <file src="Output\Temp\net40\Microsoft.Windows.Shell.dll" target="lib\net40\Microsoft.Windows.Shell.dll" /-->>
+    <file src="Output\Temp\net462\FirstFloor.ModernUI.dll" target="lib\net462\FirstFloor.ModernUI.dll" />
+    <file src="Output\Temp\net462\FirstFloor.ModernUI.XML" target="lib\net462\FirstFloor.ModernUI.XML" />
+    <file src="Output\Temp\net462\zh-TW\FirstFloor.ModernUI.resources.dll" target="lib\net462\zh-TW\FirstFloor.ModernUI.resources.dll" />
+    <file src="Output\Temp\net462\zh-CN\FirstFloor.ModernUI.resources.dll" target="lib\net462\zh-CN\FirstFloor.ModernUI.resources.dll" />
+    <file src="Output\Temp\net462\ja-JP\FirstFloor.ModernUI.resources.dll" target="lib\net462\ja-JP\FirstFloor.ModernUI.resources.dll" />
+    <file src="Output\Temp\net472\FirstFloor.ModernUI.dll" target="lib\net472\FirstFloor.ModernUI.dll" />
+    <file src="Output\Temp\net472\FirstFloor.ModernUI.XML" target="lib\net472\FirstFloor.ModernUI.XML" />
+    <file src="Output\Temp\net472\zh-TW\FirstFloor.ModernUI.resources.dll" target="lib\net472\zh-TW\FirstFloor.ModernUI.resources.dll" />
+    <file src="Output\Temp\net472\zh-CN\FirstFloor.ModernUI.resources.dll" target="lib\net472\zh-CN\FirstFloor.ModernUI.resources.dll" />
+    <file src="Output\Temp\net472\ja-JP\FirstFloor.ModernUI.resources.dll" target="lib\net472\ja-JP\FirstFloor.ModernUI.resources.dll" />
+    <file src="Output\Temp\net48\FirstFloor.ModernUI.dll" target="lib\net48\FirstFloor.ModernUI.dll" />
+    <file src="Output\Temp\net48\FirstFloor.ModernUI.XML" target="lib\net48\FirstFloor.ModernUI.XML" />
+    <file src="Output\Temp\net48\zh-TW\FirstFloor.ModernUI.resources.dll" target="lib\net48\zh-TW\FirstFloor.ModernUI.resources.dll" />
+    <file src="Output\Temp\net48\zh-CN\FirstFloor.ModernUI.resources.dll" target="lib\net48\zh-CN\FirstFloor.ModernUI.resources.dll" />
+    <file src="Output\Temp\net48\ja-JP\FirstFloor.ModernUI.resources.dll" target="lib\net48\ja-JP\FirstFloor.ModernUI.resources.dll" />
+    <!--<file src="Output\Temp\net6.0-windows\FirstFloor.ModernUI.dll" target="lib\net6.0-windows\FirstFloor.ModernUI.dll" />
+    <file src="Output\Temp\net6.0-windows\FirstFloor.ModernUI.XML" target="lib\net6.0-windows\FirstFloor.ModernUI.XML" />
+    <file src="Output\Temp\net6.0-windows\zh-TW\FirstFloor.ModernUI.resources.dll" target="lib\net6.0-windows\zh-TW\FirstFloor.ModernUI.resources.dll" />
+    <file src="Output\Temp\net6.0-windows\zh-CN\FirstFloor.ModernUI.resources.dll" target="lib\net6.0-windows\zh-CN\FirstFloor.ModernUI.resources.dll" />
+    <file src="Output\Temp\net6.0-windows\ja-JP\FirstFloor.ModernUI.resources.dll" target="lib\net6.0-windows\ja-JP\FirstFloor.ModernUI.resources.dll" />-->
   </files>
 </package>

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net462;net47;net48;netcoreapp3.1;net5.0-windows;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net462;net472;net48;netcoreapp3.1;net6.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <AssemblyName>ModernUIDemo</AssemblyName>
     <SccProjectName>SAK</SccProjectName>
@@ -40,6 +40,8 @@
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Content\ContentLoaderImages.xaml.cs" />
+    <Compile Remove="FlickrImageLoader.cs" />
     <Compile Remove="Pages\DpiAwareness.xaml.cs" />
     <Compile Remove="Pages\DpiAwarenessViewModel.cs" />
     <Page Remove="Assets\appbar.add.xaml" />
@@ -57,6 +59,7 @@
     <Page Remove="Assets\appbar.cards.heart.xaml" />
     <Page Remove="Assets\appbar.cards.spade.xaml" />
     <Page Remove="Assets\appbar.check.xaml" />
+    <Page Remove="Content\ContentLoaderImages.xaml" />
     <Page Remove="Pages\DpiAwareness.xaml" />
   </ItemGroup>
 </Project>
