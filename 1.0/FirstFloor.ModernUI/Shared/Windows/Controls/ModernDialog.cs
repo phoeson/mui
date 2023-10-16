@@ -93,6 +93,15 @@ namespace FirstFloor.ModernUI.Windows.Controls
         }
 
         /// <summary>
+        /// Tell if the content is pure text.
+        /// Pure text content will display with selectable text box control
+        /// </summary>
+        public bool IsPureTextContent
+        {
+            get { return this.Content is string; }
+        }
+
+        /// <summary>
         /// Gets the Ok button.
         /// </summary>
         public Button OkButton
@@ -199,7 +208,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
         /// <param name="button">The button.</param>
         /// <param name="owner">The window owning the messagebox. The messagebox will be located at the center of the owner.</param>
         /// <returns></returns>
-        public static MessageBoxResult ShowMessage(string text, string title, MessageBoxButton button, Window owner = null)
+        public static MessageBoxResult ShowMessageBB(string text, string title, MessageBoxButton button, Window owner = null)
         {
             var dlg = new ModernDialog {
                 Title = title,
@@ -210,6 +219,35 @@ namespace FirstFloor.ModernUI.Windows.Controls
                 MaxWidth = 640,
             };
             if (owner != null) {
+                dlg.Owner = owner;
+            }
+
+            dlg.Buttons = GetButtons(dlg, button);
+            dlg.ShowDialog();
+            return dlg.messageBoxResult;
+        }
+
+        /// <summary>
+        /// Displays a messagebox with pure text.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="button">The button.</param>
+        /// <param name="owner">The window owning the messagebox. The messagebox will be located at the center of the owner.</param>
+        /// <returns></returns>
+        public static MessageBoxResult ShowMessage(string text, string title, MessageBoxButton button, Window owner = null)
+        {
+            var dlg = new ModernDialog
+            {
+                Title = title,
+                Content = text,
+                MinHeight = 0,
+                MinWidth = 0,
+                MaxHeight = 480,
+                MaxWidth = 640,
+            };
+            if (owner != null)
+            {
                 dlg.Owner = owner;
             }
 

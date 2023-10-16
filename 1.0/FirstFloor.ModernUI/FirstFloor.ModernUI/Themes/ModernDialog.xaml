@@ -53,7 +53,13 @@
                                                    TextTrimming="CharacterEllipsis" />
 
                                             <!-- content -->
-                                            <controls:TransitioningContentControl Grid.Row="1" Margin="0,20" Content="{TemplateBinding Content}" />
+                                            <controls:TransitioningContentControl Grid.Row="1" Margin="0,20" Content="{TemplateBinding Content}"
+                                                    Visibility="{Binding IsPureTextContent, RelativeSource={RelativeSource AncestorType=controls:ModernDialog}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}"/>
+                                            <TextBox Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,20" 
+                                                     TextWrapping="Wrap" Text="{TemplateBinding Content}" 
+                                                     Foreground="{DynamicResource WindowText}" 
+                                                     Background="Transparent" AcceptsReturn="True" IsReadOnly="True" IsReadOnlyCaretVisible="False" BorderThickness="0"
+                                                     Visibility="{Binding IsPureTextContent, RelativeSource={RelativeSource AncestorType=controls:ModernDialog}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
                                             <!-- buttons -->
                                             <ItemsControl Grid.Row="2" ItemsSource="{TemplateBinding Buttons}" HorizontalAlignment="Right">
