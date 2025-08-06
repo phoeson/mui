@@ -17,7 +17,7 @@
         <Setter Property="MinWidth" Value="240" />
         <Setter Property="MinHeight" Value="240" />
         <Setter Property="ShowInTaskbar" Value="False" />
-        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
         <Setter Property="SizeToContent" Value="WidthAndHeight" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />

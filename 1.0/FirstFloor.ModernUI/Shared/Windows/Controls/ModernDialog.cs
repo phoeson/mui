@@ -43,6 +43,15 @@ namespace FirstFloor.ModernUI.Windows.Controls
             this.DefaultStyleKey = typeof(ModernDialog);
             this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
+            //to fix the issue of large content being loaded into the dialog (black border at right and bottom)
+            this.ContentRendered += (s, e) => {
+                // Clear the MaxWidth/MaxHeight so that you can manually resize larger
+                MaxWidth = double.PositiveInfinity;
+                MaxHeight = double.PositiveInfinity;
+                // Clear the SizeToContent so that it doesn't automatically resize to large datasets
+                SizeToContent = SizeToContent.Manual;
+            };
+
             this.closeCommand = new RelayCommand(o => {
                 var result = o as MessageBoxResult?;
                 if (result.HasValue) {
