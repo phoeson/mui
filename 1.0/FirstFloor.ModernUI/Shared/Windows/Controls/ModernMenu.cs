@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace FirstFloor.ModernUI.Windows.Controls
 {
@@ -44,6 +45,10 @@ namespace FirstFloor.ModernUI.Windows.Controls
         /// Defines the HoveredLinkGroup dependency property.
         /// </summary>
         public static readonly DependencyProperty HoveredLinkGroupProperty = DependencyProperty.Register("HoveredLinkGroup", typeof(LinkGroup), typeof(ModernMenu), new PropertyMetadata(OnHoveredLinkGroupChanged));
+        /// <summary>
+        /// Defines the PreviewLingerDuration dependency property.
+        /// </summary>
+        public static readonly DependencyProperty PreviewLingerDurationProperty = DependencyProperty.Register("PreviewLingerDuration", typeof(TimeSpan), typeof(ModernMenu), new PropertyMetadata(TimeSpan.FromSeconds(5)));
 
         private static readonly DependencyPropertyKey VisibleLinkGroupsPropertyKey = DependencyProperty.RegisterReadOnly("VisibleLinkGroups", typeof(ReadOnlyLinkGroupCollection), typeof(ModernMenu), null);
         /// <summary>
@@ -67,6 +72,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
         private bool isUpdatingSubSelection;
         private ListBox groupListBox;
         private ListBox subListBox;
+        private readonly DispatcherTimer previewLingerTimer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModernMenu"/> class.
@@ -74,6 +80,9 @@ namespace FirstFloor.ModernUI.Windows.Controls
         public ModernMenu()
         {
             this.DefaultStyleKey = typeof(ModernMenu);
+
+            this.previewLingerTimer = new DispatcherTimer();
+            this.previewLingerTimer.Tick += OnPreviewLingerTimerTick;
 
             // create a default link groups collection
             SetCurrentValue(LinkGroupsProperty, new LinkGroupCollection());
@@ -106,9 +115,25 @@ namespace FirstFloor.ModernUI.Windows.Controls
         }
 
         /// <inheritdoc/>
+        protected override void OnMouseEnter(MouseEventArgs e)
+        {
+            base.OnMouseEnter(e);
+            this.previewLingerTimer.Stop();
+        }
+
+        /// <inheritdoc/>
         protected override void OnMouseLeave(MouseEventArgs e)
         {
             base.OnMouseLeave(e);
+            if (HoveredLinkGroup != null) {
+                this.previewLingerTimer.Interval = PreviewLingerDuration;
+                this.previewLingerTimer.Start();
+            }
+        }
+
+        private void OnPreviewLingerTimerTick(object sender, EventArgs e)
+        {
+            this.previewLingerTimer.Stop();
             HoveredLinkGroup = null;
         }
 
@@ -304,6 +329,15 @@ namespace FirstFloor.ModernUI.Windows.Controls
         {
             get { return (LinkGroup)GetValue(HoveredLinkGroupProperty); }
             set { SetValue(HoveredLinkGroupProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the duration the preview sub-menu stays visible after the mouse leaves the control.
+        /// </summary>
+        public TimeSpan PreviewLingerDuration
+        {
+            get { return (TimeSpan)GetValue(PreviewLingerDurationProperty); }
+            set { SetValue(PreviewLingerDurationProperty, value); }
         }
 
         /// <summary>
