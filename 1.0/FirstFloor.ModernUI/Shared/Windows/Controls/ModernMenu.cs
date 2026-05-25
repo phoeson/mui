@@ -8,15 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace FirstFloor.ModernUI.Windows.Controls
 {
     /// <summary>
     /// Represents the menu in a Modern UI styled window.
     /// </summary>
+    [TemplatePart(Name = PartGroupListBox, Type = typeof(ListBox))]
+    [TemplatePart(Name = PartSubListBox, Type = typeof(ListBox))]
     public class ModernMenu
         : Control
     {
+        private const string PartGroupListBox = "PART_GroupListBox";
+        private const string PartSubListBox = "PART_SubListBox";
+
         /// <summary>
         /// Defines the LinkGroups dependency property.
         /// </summary>
@@ -33,12 +40,22 @@ namespace FirstFloor.ModernUI.Windows.Controls
         /// Defines the SelectedSource dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedSourceProperty = DependencyProperty.Register("SelectedSource", typeof(Uri), typeof(ModernMenu), new PropertyMetadata(OnSelectedSourceChanged));
+        /// <summary>
+        /// Defines the HoveredLinkGroup dependency property.
+        /// </summary>
+        public static readonly DependencyProperty HoveredLinkGroupProperty = DependencyProperty.Register("HoveredLinkGroup", typeof(LinkGroup), typeof(ModernMenu), new PropertyMetadata(OnHoveredLinkGroupChanged));
 
         private static readonly DependencyPropertyKey VisibleLinkGroupsPropertyKey = DependencyProperty.RegisterReadOnly("VisibleLinkGroups", typeof(ReadOnlyLinkGroupCollection), typeof(ModernMenu), null);
         /// <summary>
         /// Defines the VisibleLinkGroups dependency property.
         /// </summary>
         public static readonly DependencyProperty VisibleLinkGroupsProperty = VisibleLinkGroupsPropertyKey.DependencyProperty;
+
+        private static readonly DependencyPropertyKey PreviewLinkGroupPropertyKey = DependencyProperty.RegisterReadOnly("PreviewLinkGroup", typeof(LinkGroup), typeof(ModernMenu), null);
+        /// <summary>
+        /// Defines the PreviewLinkGroup dependency property. Returns HoveredLinkGroup when hovering, otherwise SelectedLinkGroup.
+        /// </summary>
+        public static readonly DependencyProperty PreviewLinkGroupProperty = PreviewLinkGroupPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Occurs when the selected source has changed.
@@ -47,6 +64,9 @@ namespace FirstFloor.ModernUI.Windows.Controls
 
         private Dictionary<string, ReadOnlyLinkGroupCollection> groupMap = new Dictionary<string, ReadOnlyLinkGroupCollection>();     // stores LinkGroupCollections by GroupKey
         private bool isSelecting;
+        private bool isUpdatingSubSelection;
+        private ListBox groupListBox;
+        private ListBox subListBox;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModernMenu"/> class.
@@ -57,6 +77,92 @@ namespace FirstFloor.ModernUI.Windows.Controls
 
             // create a default link groups collection
             SetCurrentValue(LinkGroupsProperty, new LinkGroupCollection());
+        }
+
+        /// <inheritdoc/>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if (this.groupListBox != null) {
+                this.groupListBox.ItemContainerGenerator.StatusChanged -= OnGroupListBoxGeneratorStatusChanged;
+            }
+
+            if (this.subListBox != null) {
+                this.subListBox.SelectionChanged -= OnSubListBoxSelectionChanged;
+            }
+
+            this.groupListBox = GetTemplateChild(PartGroupListBox) as ListBox;
+            this.subListBox = GetTemplateChild(PartSubListBox) as ListBox;
+
+            if (this.groupListBox != null) {
+                this.groupListBox.ItemContainerGenerator.StatusChanged += OnGroupListBoxGeneratorStatusChanged;
+                WireGroupItemMouseEvents();
+            }
+
+            if (this.subListBox != null) {
+                this.subListBox.SelectionChanged += OnSubListBoxSelectionChanged;
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnMouseLeave(MouseEventArgs e)
+        {
+            base.OnMouseLeave(e);
+            HoveredLinkGroup = null;
+        }
+
+        private void OnSubListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.isUpdatingSubSelection) return;
+            if (e.AddedItems.Count > 0 && e.AddedItems[0] is Link link) {
+                SetCurrentValue(SelectedLinkProperty, link);
+            }
+        }
+
+        private void UpdateSubListBoxSelection()
+        {
+            if (this.subListBox == null) return;
+            this.isUpdatingSubSelection = true;
+            this.subListBox.SelectedItem = (HoveredLinkGroup == null || HoveredLinkGroup == SelectedLinkGroup)
+                ? SelectedLink
+                : null;
+            this.isUpdatingSubSelection = false;
+        }
+
+        private void OnGroupListBoxGeneratorStatusChanged(object sender, EventArgs e)
+        {
+            WireGroupItemMouseEvents();
+        }
+
+        private void WireGroupItemMouseEvents()
+        {
+            if (this.groupListBox == null || this.groupListBox.ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated) {
+                return;
+            }
+
+            foreach (var item in this.groupListBox.Items) {
+                var container = this.groupListBox.ItemContainerGenerator.ContainerFromItem(item) as ListBoxItem;
+                if (container == null) continue;
+                container.MouseEnter -= OnGroupItemMouseEnter;
+                container.MouseEnter += OnGroupItemMouseEnter;
+            }
+        }
+
+        private void OnGroupItemMouseEnter(object sender, MouseEventArgs e)
+        {
+            HoveredLinkGroup = ((ListBoxItem)sender).Content as LinkGroup;
+        }
+
+        private static void OnHoveredLinkGroupChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            ((ModernMenu)o).UpdatePreviewLinkGroup();
+        }
+
+        private void UpdatePreviewLinkGroup()
+        {
+            SetValue(PreviewLinkGroupPropertyKey, HoveredLinkGroup ?? SelectedLinkGroup);
+            UpdateSubListBoxSelection();
         }
 
         private static void OnLinkGroupsChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
@@ -82,6 +188,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
         private static void OnSelectedLinkGroupChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             // retrieve the selected link from the group
+            var menu = (ModernMenu)o;
             var group = (LinkGroup)e.NewValue;
             Link selectedLink = null;
             if (group != null) {
@@ -100,18 +207,20 @@ namespace FirstFloor.ModernUI.Windows.Controls
             }
 
             // update the selected link
-            ((ModernMenu)o).SetCurrentValue(SelectedLinkProperty, selectedLink);
+            menu.SetCurrentValue(SelectedLinkProperty, selectedLink);
+            menu.UpdatePreviewLinkGroup();
         }
 
         private static void OnSelectedLinkChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             // update selected source
-            var newValue = (Link)e.NewValue;
+            var menu = (ModernMenu)o;
             Uri selectedSource = null;
-            if (newValue != null) {
-                selectedSource = newValue.Source;
+            if (e.NewValue != null) {
+                selectedSource = ((Link)e.NewValue).Source;
             }
-            ((ModernMenu)o).SetCurrentValue(SelectedSourceProperty, selectedSource);
+            menu.SetCurrentValue(SelectedSourceProperty, selectedSource);
+            menu.UpdateSubListBoxSelection();
         }
 
         private void OnLinkGroupsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -186,6 +295,23 @@ namespace FirstFloor.ModernUI.Windows.Controls
         public LinkGroup SelectedLinkGroup
         {
             get { return (LinkGroup)GetValue(SelectedLinkGroupProperty); }
+        }
+
+        /// <summary>
+        /// Gets or sets the link group currently under the mouse pointer.
+        /// </summary>
+        public LinkGroup HoveredLinkGroup
+        {
+            get { return (LinkGroup)GetValue(HoveredLinkGroupProperty); }
+            set { SetValue(HoveredLinkGroupProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets the link group whose sub-links are currently previewed. Returns HoveredLinkGroup when hovering, otherwise SelectedLinkGroup.
+        /// </summary>
+        public LinkGroup PreviewLinkGroup
+        {
+            get { return (LinkGroup)GetValue(PreviewLinkGroupProperty); }
         }
 
         /// <summary>
