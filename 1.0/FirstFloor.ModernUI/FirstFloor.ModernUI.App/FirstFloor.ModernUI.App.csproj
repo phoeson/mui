@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net462;net472;net48;netcoreapp3.1;net6.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
@@ -35,16 +35,16 @@
     <Resource Include="Assets\background.snowflakes.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="Microsoft.CSharp" />
+    <PackageReference Include="System.Data.DataSetExtensions" />
+    <PackageReference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Content\ContentLoaderImages.xaml.cs" />
+    <!--<Compile Remove="Content\ContentLoaderImages.xaml.cs" />
     <Compile Remove="FlickrImageLoader.cs" />
     <Compile Remove="Pages\DpiAwareness.xaml.cs" />
-    <Compile Remove="Pages\DpiAwarenessViewModel.cs" />
-    <Page Remove="Assets\appbar.add.xaml" />
+    <Compile Remove="Pages\DpiAwarenessViewModel.cs" />-->
+    <!--<Page Remove="Assets\appbar.add.xaml" />
     <Page Remove="Assets\appbar.adobe.bridge.xaml" />
     <Page Remove="Assets\appbar.arrow.collapsed.xaml" />
     <Page Remove="Assets\appbar.arrow.corner.up.right.xaml" />
@@ -60,6 +60,6 @@
     <Page Remove="Assets\appbar.cards.spade.xaml" />
     <Page Remove="Assets\appbar.check.xaml" />
     <Page Remove="Content\ContentLoaderImages.xaml" />
-    <Page Remove="Pages\DpiAwareness.xaml" />
+    <Page Remove="Pages\DpiAwareness.xaml" />-->
   </ItemGroup>
 </Project>
