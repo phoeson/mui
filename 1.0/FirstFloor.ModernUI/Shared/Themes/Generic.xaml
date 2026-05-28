@@ -23,6 +23,10 @@
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/InfoBar.xaml" />
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/ToggleSwitch.xaml" />
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/StatusBadge.xaml" />
+        <!-- Phase 3 additions -->
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/SplitButton.xaml" />
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/CommandBar.xaml" />
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/StepIndicator.xaml" />
     </ResourceDictionary.MergedDictionaries>
  
 </ResourceDictionary>

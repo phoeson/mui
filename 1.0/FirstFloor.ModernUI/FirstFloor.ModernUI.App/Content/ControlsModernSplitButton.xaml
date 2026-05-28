@@ -1,0 +1,85 @@
+<UserControl x:Class="FirstFloor.ModernUI.App.Content.ControlsModernSplitButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="520">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel HorizontalAlignment="Left" Margin="0,0,32,0">
+
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <!--  SplitButton                                           -->
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <TextBlock Text="SPLITBUTTON" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+                <mui:BBCodeBlock Margin="0,0,0,20"
+                    BBCode="Combines a primary action with a dropdown chevron for additional commands. Click the label to invoke the primary [b]Command[/b]; click the arrow to open the attached [b]ContextMenu[/b]."/>
+
+                <!-- Dispatch actions -->
+                <TextBlock Text="Dispatch" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SplitButton Content="Dispatch All"
+                                 HorizontalAlignment="Left"
+                                 Click="OnSplitButtonClick"
+                                 Margin="0,0,0,4">
+                    <mui:SplitButton.DropDown>
+                        <ContextMenu>
+                            <MenuItem Header="Dispatch Selected"    Click="OnSplitButtonClick"/>
+                            <MenuItem Header="Dispatch by Route"    Click="OnSplitButtonClick"/>
+                            <Separator/>
+                            <MenuItem Header="Schedule for Later…"  Click="OnSplitButtonClick"/>
+                        </ContextMenu>
+                    </mui:SplitButton.DropDown>
+                </mui:SplitButton>
+                <TextBlock x:Name="DispatchFeedback" Foreground="{DynamicResource Accent}" Margin="0,0,0,20"/>
+
+                <!-- Print actions -->
+                <TextBlock Text="Print" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SplitButton Content="Print Labels"
+                                 HorizontalAlignment="Left"
+                                 Click="OnPrintClick"
+                                 Margin="0,0,0,4">
+                    <mui:SplitButton.DropDown>
+                        <ContextMenu>
+                            <MenuItem Header="Print Packing Slip"   Click="OnPrintClick"/>
+                            <MenuItem Header="Print Invoice"         Click="OnPrintClick"/>
+                            <MenuItem Header="Print Manifest"        Click="OnPrintClick"/>
+                        </ContextMenu>
+                    </mui:SplitButton.DropDown>
+                </mui:SplitButton>
+                <TextBlock x:Name="PrintFeedback" Foreground="{DynamicResource Accent}" Margin="0,0,0,20"/>
+
+                <!-- Export actions -->
+                <TextBlock Text="Export" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SplitButton Content="Export to CSV"
+                                 HorizontalAlignment="Left"
+                                 Click="OnExportClick"
+                                 Margin="0,0,0,4">
+                    <mui:SplitButton.DropDown>
+                        <ContextMenu>
+                            <MenuItem Header="Export to Excel"       Click="OnExportClick"/>
+                            <MenuItem Header="Export to PDF"         Click="OnExportClick"/>
+                            <MenuItem Header="Export to JSON"        Click="OnExportClick"/>
+                        </ContextMenu>
+                    </mui:SplitButton.DropDown>
+                </mui:SplitButton>
+                <TextBlock x:Name="ExportFeedback" Foreground="{DynamicResource Accent}" Margin="0,0,0,20"/>
+
+                <!-- Disabled state -->
+                <TextBlock Text="Disabled" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SplitButton Content="Receive Shipment"
+                                 IsEnabled="False"
+                                 HorizontalAlignment="Left"
+                                 Margin="0,0,0,32">
+                    <mui:SplitButton.DropDown>
+                        <ContextMenu>
+                            <MenuItem Header="Partial Receive"/>
+                        </ContextMenu>
+                    </mui:SplitButton.DropDown>
+                </mui:SplitButton>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

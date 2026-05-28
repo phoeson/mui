@@ -22,6 +22,9 @@
                 <mui:Link DisplayName="InfoBar" Source="/Content/ControlsModernInfoBar.xaml" />
                 <mui:Link DisplayName="ToggleSwitch" Source="/Content/ControlsModernToggleSwitch.xaml" />
                 <mui:Link DisplayName="StatusBadge" Source="/Content/ControlsModernStatusBadge.xaml" />
+                <mui:Link DisplayName="SplitButton" Source="/Content/ControlsModernSplitButton.xaml" />
+                <mui:Link DisplayName="CommandBar" Source="/Content/ControlsModernCommandBar.xaml" />
+                <mui:Link DisplayName="StepIndicator" Source="/Content/ControlsModernStepIndicator.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

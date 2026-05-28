@@ -189,6 +189,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\SplitButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\CommandBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\StepIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ModernUIHelper.cs" />
@@ -246,11 +258,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\DpiInformation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\ButtonGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\ButtonGroupItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\CommandBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\InfoBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\NumericUpDown.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\SearchBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\SegmentedControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\SplitButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\StatusBadge.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\StepIndicator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\ToggleSwitch.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\ModernButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\ModernDialog.cs" />

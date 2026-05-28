@@ -1,0 +1,153 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FirstFloor.ModernUI.Windows.Controls">
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         SplitButton
+         Primary action button with a dropdown arrow for additional commands.
+
+         Usage:
+             <mui:SplitButton Content="Dispatch All" Click="OnDispatch">
+                 <mui:SplitButton.DropDown>
+                     <ContextMenu>
+                         <MenuItem Header="Dispatch Selected"/>
+                         <MenuItem Header="Schedule for Later"/>
+                     </ContextMenu>
+                 </mui:SplitButton.DropDown>
+             </mui:SplitButton>
+    ═══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Primary action area — transparent fill, hover/press states of its own -->
+    <Style x:Key="SplitButtonActionStyle" TargetType="Button">
+        <Setter Property="FocusVisualStyle"          Value="{x:Null}"/>
+        <Setter Property="Background"                Value="Transparent"/>
+        <Setter Property="BorderThickness"           Value="0"/>
+        <Setter Property="Foreground"                Value="{DynamicResource ButtonText}"/>
+        <Setter Property="Padding"                   Value="14,5"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment"   Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Fill"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Fill" Property="Background" Value="{DynamicResource ButtonBackgroundHover}"/>
+                            <Setter Property="Foreground"                    Value="{DynamicResource ButtonTextHover}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Fill" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
+                            <Setter Property="Foreground"                    Value="{DynamicResource ButtonTextPressed}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Dropdown arrow toggle — transparent fill, chevron icon -->
+    <Style x:Key="SplitButtonDropDownStyle" TargetType="ToggleButton">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Cursor"           Value="Hand"/>
+        <Setter Property="Background"       Value="Transparent"/>
+        <Setter Property="BorderThickness"  Value="0"/>
+        <Setter Property="Foreground"       Value="{DynamicResource ButtonText}"/>
+        <Setter Property="Padding"          Value="8,5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="Fill"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <Path x:Name="Arrow"
+                              Data="M 0,0 L 4,4 L 8,0"
+                              Width="8" Height="5"
+                              Stroke="{TemplateBinding Foreground}"
+                              StrokeThickness="1.5"
+                              StrokeEndLineCap="Round"
+                              StrokeStartLineCap="Round"
+                              StrokeLineJoin="Round"
+                              Stretch="None"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Fill" Property="Background" Value="{DynamicResource ButtonBackgroundHover}"/>
+                            <Setter Property="Foreground"                    Value="{DynamicResource ButtonTextHover}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Fill" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Fill" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:SplitButton">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background"       Value="{DynamicResource ButtonBackground}"/>
+        <Setter Property="BorderBrush"      Value="{DynamicResource ButtonBorder}"/>
+        <Setter Property="BorderThickness"  Value="1"/>
+        <Setter Property="Foreground"       Value="{DynamicResource ButtonText}"/>
+        <Setter Property="MinHeight"        Value="28"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:SplitButton">
+                    <Border x:Name="Chrome"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!-- Primary label area -->
+                                <ColumnDefinition Width="*"/>
+                                <!-- Divider line -->
+                                <ColumnDefinition Width="Auto"/>
+                                <!-- Chevron area -->
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Primary action -->
+                            <Button x:Name="PART_ActionButton"
+                                    Grid.Column="0"
+                                    Style="{StaticResource SplitButtonActionStyle}"
+                                    Content="{TemplateBinding Content}"/>
+
+                            <!-- Vertical divider -->
+                            <Border Grid.Column="1"
+                                    Width="1"
+                                    Margin="0,5"
+                                    Background="{DynamicResource SeparatorBackground}"/>
+
+                            <!-- Dropdown arrow -->
+                            <ToggleButton x:Name="PART_DropDownButton"
+                                          Grid.Column="2"
+                                          Style="{StaticResource SplitButtonDropDownStyle}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Chrome" Property="BorderBrush" Value="{DynamicResource ButtonBorderHover}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

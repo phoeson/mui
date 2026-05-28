@@ -1,0 +1,122 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FirstFloor.ModernUI.Windows.Controls">
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         CommandBar
+         Horizontal toolbar hosting CommandBarButton and CommandBarSeparator.
+
+         Usage:
+             <mui:CommandBar>
+                 <mui:CommandBarButton Label="Print"  Command="{Binding PrintCmd}">
+                     <mui:CommandBarButton.Icon>
+                         <Path Data="M 2,6 L 14,6..." Fill="{DynamicResource ButtonText}"/>
+                     </mui:CommandBarButton.Icon>
+                 </mui:CommandBarButton>
+                 <mui:CommandBarSeparator/>
+                 <mui:CommandBarButton Label="Export" Command="{Binding ExportCmd}"/>
+             </mui:CommandBar>
+
+             Set IsCompact="True" on the CommandBar to hide all labels.
+    ═══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- CommandBar container -->
+    <Style TargetType="controls:CommandBar">
+        <Setter Property="Background"      Value="{DynamicResource ButtonBackground}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource ButtonBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Focusable"       Value="False"/>
+        <Setter Property="Padding"         Value="4,2"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:CommandBar">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="True">
+                        <ItemsPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- CommandBarButton — stacked icon + label, flat hover style -->
+    <Style TargetType="controls:CommandBarButton">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Cursor"           Value="Hand"/>
+        <Setter Property="Background"       Value="Transparent"/>
+        <Setter Property="BorderThickness"  Value="0"/>
+        <Setter Property="Foreground"       Value="{DynamicResource ButtonText}"/>
+        <Setter Property="Padding"          Value="10,5"/>
+        <Setter Property="MinWidth"         Value="48"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:CommandBarButton">
+                    <Border x:Name="Chrome"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="3"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="True">
+                        <StackPanel HorizontalAlignment="Center">
+                            <!-- Icon (16×16 slot) -->
+                            <ContentPresenter x:Name="IconPresenter"
+                                              Content="{TemplateBinding Icon}"
+                                              Width="16" Height="16"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                            <!-- Label — collapsed in compact mode -->
+                            <TextBlock x:Name="LabelText"
+                                       Text="{TemplateBinding Label}"
+                                       FontSize="10"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,3,0,0"
+                                       Foreground="{TemplateBinding Foreground}"/>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Chrome" Property="Background" Value="{DynamicResource ButtonBackgroundHover}"/>
+                            <Setter Property="Foreground"                      Value="{DynamicResource ButtonTextHover}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Chrome" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
+                            <Setter Property="Foreground"                      Value="{DynamicResource ButtonTextPressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground"                      Value="{DynamicResource ButtonTextDisabled}"/>
+                        </Trigger>
+                        <Trigger Property="IsCompact" Value="True">
+                            <Setter TargetName="LabelText" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- CommandBarSeparator — thin vertical divider -->
+    <Style TargetType="controls:CommandBarSeparator">
+        <Setter Property="Background" Value="{DynamicResource SeparatorBackground}"/>
+        <Setter Property="Width"      Value="1"/>
+        <Setter Property="Margin"     Value="4,6"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:CommandBarSeparator">
+                    <Border Background="{TemplateBinding Background}"
+                            Width="{TemplateBinding Width}"
+                            Margin="{TemplateBinding Margin}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,181 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FirstFloor.ModernUI.Windows.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         StepIndicator
+         Horizontal multi-step progress tracker.
+
+         Usage:
+             <mui:StepIndicator CurrentStep="2">
+                 <mui:StepIndicatorItem Title="Created"/>
+                 <mui:StepIndicatorItem Title="Confirmed"/>
+                 <mui:StepIndicatorItem Title="Processing"/>
+                 <mui:StepIndicatorItem Title="Dispatched"/>
+             </mui:StepIndicator>
+
+             Or bind ItemsSource to a List(Of String) and set CurrentStep.
+    ═══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Each step: [left connector] [circle] [right connector] / [title] / [description?] -->
+    <Style TargetType="controls:StepIndicatorItem">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Foreground"       Value="{DynamicResource WindowTextReadOnly}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:StepIndicatorItem">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <!-- Left connector half -->
+                            <ColumnDefinition Width="*"/>
+                            <!-- Circle -->
+                            <ColumnDefinition Width="Auto"/>
+                            <!-- Right connector half -->
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <!-- Connector + circle row -->
+                            <RowDefinition Height="Auto"/>
+                            <!-- Title row -->
+                            <RowDefinition Height="Auto"/>
+                            <!-- Description row -->
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Left connector half (hidden for first item) -->
+                        <Border x:Name="LeftConnector"
+                                Grid.Column="0" Grid.Row="0"
+                                Height="2"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource SeparatorBackground}"/>
+
+                        <!-- Right connector half (hidden for last item) -->
+                        <Border x:Name="RightConnector"
+                                Grid.Column="2" Grid.Row="0"
+                                Height="2"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource SeparatorBackground}"/>
+
+                        <!-- Step circle: shows number or checkmark -->
+                        <Border x:Name="StepCircle"
+                                Grid.Column="1" Grid.Row="0"
+                                Width="28" Height="28"
+                                CornerRadius="14"
+                                BorderThickness="2"
+                                BorderBrush="{DynamicResource SeparatorBackground}"
+                                Background="Transparent"
+                                HorizontalAlignment="Center">
+                            <Grid>
+                                <!-- Ordinal number (Pending / Active) -->
+                                <TextBlock x:Name="NumberText"
+                                           Text="{TemplateBinding StepNumber}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource WindowTextReadOnly}"/>
+                                <!-- Checkmark (Completed) -->
+                                <Path x:Name="CheckPath"
+                                      Data="M 1,5 L 4,9 L 11,1"
+                                      Stroke="White"
+                                      StrokeThickness="2"
+                                      StrokeEndLineCap="Round"
+                                      StrokeStartLineCap="Round"
+                                      StrokeLineJoin="Round"
+                                      Width="12" Height="9"
+                                      Stretch="None"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Visibility="Collapsed"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Step title -->
+                        <TextBlock x:Name="TitleText"
+                                   Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1"
+                                   Text="{TemplateBinding Title}"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"
+                                   FontSize="11"
+                                   Margin="4,6,4,0"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   TextWrapping="Wrap"/>
+
+                        <!-- Optional description — shown only when Description is set -->
+                        <TextBlock x:Name="DescriptionText"
+                                   Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2"
+                                   Text="{TemplateBinding Description}"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"
+                                   FontSize="10"
+                                   Margin="4,2,4,0"
+                                   Foreground="{DynamicResource WindowTextReadOnly}"
+                                   TextWrapping="Wrap"
+                                   Visibility="{Binding Description,
+                                                RelativeSource={RelativeSource TemplatedParent},
+                                                Converter={StaticResource NullOrEmptyStringToVisibilityConverter},
+                                                ConverterParameter=inverse}"/>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+
+                        <!-- Hide left connector for first item -->
+                        <Trigger Property="IsFirst" Value="True">
+                            <Setter TargetName="LeftConnector" Property="Visibility" Value="Hidden"/>
+                        </Trigger>
+
+                        <!-- Hide right connector for last item -->
+                        <Trigger Property="IsLast" Value="True">
+                            <Setter TargetName="RightConnector" Property="Visibility" Value="Hidden"/>
+                        </Trigger>
+
+                        <!-- Active: filled circle + accent left connector (path from last completed step) -->
+                        <Trigger Property="Status" Value="Active">
+                            <Setter TargetName="StepCircle"    Property="Background"  Value="{DynamicResource Accent}"/>
+                            <Setter TargetName="StepCircle"    Property="BorderBrush" Value="{DynamicResource Accent}"/>
+                            <Setter TargetName="NumberText"    Property="Foreground"  Value="White"/>
+                            <Setter TargetName="LeftConnector" Property="Background"  Value="{DynamicResource Accent}"/>
+                            <Setter Property="Foreground"                              Value="{DynamicResource WindowText}"/>
+                        </Trigger>
+
+                        <!-- Completed: filled circle + checkmark + both connectors accent -->
+                        <Trigger Property="Status" Value="Completed">
+                            <Setter TargetName="StepCircle"     Property="Background"  Value="{DynamicResource Accent}"/>
+                            <Setter TargetName="StepCircle"     Property="BorderBrush" Value="{DynamicResource Accent}"/>
+                            <Setter TargetName="NumberText"     Property="Visibility"  Value="Collapsed"/>
+                            <Setter TargetName="CheckPath"      Property="Visibility"  Value="Visible"/>
+                            <Setter TargetName="LeftConnector"  Property="Background"  Value="{DynamicResource Accent}"/>
+                            <Setter TargetName="RightConnector" Property="Background"  Value="{DynamicResource Accent}"/>
+                            <Setter Property="Foreground"                               Value="{DynamicResource WindowText}"/>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- StepIndicator container: UniformGrid so all steps share equal width -->
+    <Style TargetType="controls:StepIndicator">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="1"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:StepIndicator">
+                    <ItemsPresenter SnapsToDevicePixels="True"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

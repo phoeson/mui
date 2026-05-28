@@ -1,0 +1,77 @@
+<UserControl x:Class="FirstFloor.ModernUI.App.Content.ControlsModernStepIndicator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d"
+             d:DesignHeight="800" d:DesignWidth="560">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel Margin="0,0,32,0">
+
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <!--  StepIndicator                                         -->
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <TextBlock Text="STEPINDICATOR" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+                <mui:BBCodeBlock Margin="0,0,0,20"
+                    BBCode="Visualises progress through a multi-stage workflow. Set [b]CurrentStep[/b] (zero-based) to drive progress. Items before [b]CurrentStep[/b] are marked Completed; the item at [b]CurrentStep[/b] is Active; later items are Pending. Populate with [b]StepIndicatorItem[/b] children or bind [b]ItemsSource[/b] to a list of strings."/>
+
+                <!-- Order fulfilment flow -->
+                <TextBlock Text="Order fulfilment (CurrentStep=3 — Picked)" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:StepIndicator CurrentStep="3" Margin="0,0,0,28">
+                    <mui:StepIndicatorItem Title="Created"/>
+                    <mui:StepIndicatorItem Title="Confirmed"/>
+                    <mui:StepIndicatorItem Title="Processing"/>
+                    <mui:StepIndicatorItem Title="Picked"/>
+                    <mui:StepIndicatorItem Title="Packed"/>
+                    <mui:StepIndicatorItem Title="Dispatched"/>
+                    <mui:StepIndicatorItem Title="Delivered"/>
+                </mui:StepIndicator>
+
+                <!-- Shipment tracking -->
+                <TextBlock Text="Shipment tracking (CurrentStep=2 — Out for Delivery)" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:StepIndicator CurrentStep="2" Margin="0,0,0,28">
+                    <mui:StepIndicatorItem Title="Manifested"/>
+                    <mui:StepIndicatorItem Title="In Transit"/>
+                    <mui:StepIndicatorItem Title="Out for Delivery"/>
+                    <mui:StepIndicatorItem Title="Delivered"/>
+                </mui:StepIndicator>
+
+                <!-- All complete -->
+                <TextBlock Text="All steps completed (CurrentStep=4)" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:StepIndicator CurrentStep="4" Margin="0,0,0,28">
+                    <mui:StepIndicatorItem Title="Quote"/>
+                    <mui:StepIndicatorItem Title="Approved"/>
+                    <mui:StepIndicatorItem Title="Ordered"/>
+                    <mui:StepIndicatorItem Title="Received"/>
+                    <mui:StepIndicatorItem Title="Closed"/>
+                </mui:StepIndicator>
+
+                <!-- With descriptions -->
+                <TextBlock Text="With descriptions" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:StepIndicator CurrentStep="1" Margin="0,0,0,28">
+                    <mui:StepIndicatorItem Title="Upload"      Description="Select CSV file"/>
+                    <mui:StepIndicatorItem Title="Validate"    Description="Check for errors"/>
+                    <mui:StepIndicatorItem Title="Map Fields"  Description="Assign columns"/>
+                    <mui:StepIndicatorItem Title="Import"      Description="Write to database"/>
+                </mui:StepIndicator>
+
+                <!-- Interactive demo -->
+                <TextBlock Text="Interactive — use Next / Back to advance" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,8"/>
+                <mui:StepIndicator x:Name="InteractiveIndicator" CurrentStep="0" Margin="0,0,0,12">
+                    <mui:StepIndicatorItem Title="Draft"/>
+                    <mui:StepIndicatorItem Title="Review"/>
+                    <mui:StepIndicatorItem Title="Approved"/>
+                    <mui:StepIndicatorItem Title="Released"/>
+                </mui:StepIndicator>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                    <Button Content="← Back"   Click="OnBack"   Margin="0,0,8,0"/>
+                    <Button Content="Next →"   Click="OnNext"/>
+                </StackPanel>
+                <TextBlock x:Name="InteractiveFeedback" Foreground="{DynamicResource Accent}" Margin="0,4,0,32"/>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
