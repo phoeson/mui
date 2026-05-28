@@ -1,0 +1,153 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FirstFloor.ModernUI.Windows.Controls">
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         NumericUpDown
+         Numeric spinner with increment / decrement buttons.
+
+         Usage:
+             <mui:NumericUpDown Value="{Binding Quantity}"
+                                Minimum="0" Maximum="9999" Step="1"
+                                StringFormat="0"/>
+    ═══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Internal spin-button style — intentionally not keyed for public use -->
+    <Style x:Key="NumericSpinButtonStyle" TargetType="RepeatButton">
+        <Setter Property="Focusable"       Value="False"/>
+        <Setter Property="Background"      Value="{DynamicResource ButtonBackground}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground"      Value="{DynamicResource ButtonText}"/>
+        <Setter Property="Padding"         Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border x:Name="Chrome"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Chrome" Property="Background" Value="{DynamicResource ButtonBackgroundHover}"/>
+                            <Setter Property="Foreground"                      Value="{DynamicResource ButtonTextHover}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Chrome" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
+                            <Setter Property="Foreground"                      Value="{DynamicResource ButtonTextPressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource ButtonTextDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:NumericUpDown">
+        <Setter Property="FocusVisualStyle"  Value="{x:Null}"/>
+        <Setter Property="Background"        Value="{DynamicResource InputBackground}"/>
+        <Setter Property="BorderBrush"       Value="{DynamicResource InputBorder}"/>
+        <Setter Property="BorderThickness"   Value="1"/>
+        <Setter Property="Foreground"        Value="{DynamicResource InputText}"/>
+        <Setter Property="Padding"           Value="6,3"/>
+        <Setter Property="MinWidth"          Value="90"/>
+        <Setter Property="MinHeight"         Value="28"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:NumericUpDown">
+                    <Border x:Name="Chrome"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <!-- Divider -->
+                                <ColumnDefinition Width="1"/>
+                                <!-- Spin buttons -->
+                                <ColumnDefinition Width="18"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Editable text area -->
+                            <TextBox x:Name="PART_TextBox"
+                                     Grid.Column="0"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Foreground="{TemplateBinding Foreground}"
+                                     Padding="{TemplateBinding Padding}"
+                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                     HorizontalContentAlignment="Right"
+                                     FocusVisualStyle="{x:Null}"
+                                     SnapsToDevicePixels="True"/>
+
+                            <!-- Divider line between text and spin buttons -->
+                            <Rectangle Grid.Column="1"
+                                       Fill="{DynamicResource InputBorder}"
+                                       VerticalAlignment="Stretch"/>
+
+                            <!-- Increment / decrement stack -->
+                            <Grid Grid.Column="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <RepeatButton x:Name="PART_IncreaseButton"
+                                              Grid.Row="0"
+                                              Style="{StaticResource NumericSpinButtonStyle}"
+                                              Delay="500" Interval="100">
+                                    <!-- Up arrow using a Path geometry -->
+                                    <Path Data="M 0,4 L 4,0 L 8,4 Z"
+                                          Width="8" Height="4"
+                                          Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RepeatButton}}"
+                                          Stretch="None"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                                </RepeatButton>
+
+                                <!-- Divider between the two arrow buttons -->
+                                <Rectangle Grid.Row="1"
+                                           Fill="{DynamicResource InputBorder}"
+                                           HorizontalAlignment="Stretch"/>
+
+                                <RepeatButton x:Name="PART_DecreaseButton"
+                                              Grid.Row="2"
+                                              Style="{StaticResource NumericSpinButtonStyle}"
+                                              Delay="500" Interval="100">
+                                    <!-- Down arrow using a Path geometry -->
+                                    <Path Data="M 0,0 L 8,0 L 4,4 Z"
+                                          Width="8" Height="4"
+                                          Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RepeatButton}}"
+                                          Stretch="None"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                                </RepeatButton>
+
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Chrome" Property="BorderBrush"  Value="{DynamicResource InputBorderHover}"/>
+                            <Setter TargetName="Chrome" Property="Background"   Value="{DynamicResource InputBackgroundHover}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource InputTextDisabled}"/>
+                        </Trigger>
+                        <!-- Highlight the outer border when the inner TextBox is focused -->
+                        <Trigger SourceName="PART_TextBox" Property="IsFocused" Value="True">
+                            <Setter TargetName="Chrome" Property="BorderBrush" Value="{DynamicResource Accent}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

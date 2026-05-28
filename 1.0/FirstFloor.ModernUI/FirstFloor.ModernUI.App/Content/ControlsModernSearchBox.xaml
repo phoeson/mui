@@ -1,0 +1,64 @@
+<UserControl x:Class="FirstFloor.ModernUI.App.Content.ControlsModernSearchBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="500">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel HorizontalAlignment="Left" Margin="0,0,32,0">
+
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <!--  SearchBox                                             -->
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <TextBlock Text="SEARCHBOX" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+                <mui:BBCodeBlock Margin="0,0,0,16"
+                    BBCode="A search input with an integrated magnifier icon, placeholder watermark, and a live ✕ clear button that appears as soon as text is entered. Press [b]Enter[/b] to execute the bound [b]SearchCommand[/b]. Press [b]Escape[/b] to clear the text." />
+
+                <!-- Default — watermark only -->
+                <TextBlock Text="Default (built-in watermark)" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SearchBox Width="280" HorizontalAlignment="Left" Margin="0,0,0,24"/>
+
+                <!-- Custom watermark for an inventory search -->
+                <TextBlock Text="Custom watermark" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SearchBox Width="280" HorizontalAlignment="Left"
+                               Watermark="Search SKU, barcode or description…"
+                               Margin="0,0,0,24"/>
+
+                <!-- Live Text binding — shows the typed value in real time -->
+                <TextBlock Text="Two-way Text binding" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SearchBox x:Name="liveSearch"
+                               Width="280" HorizontalAlignment="Left"
+                               Watermark="Type something…"
+                               Margin="0,0,0,4"/>
+                <TextBlock Margin="0,0,0,24">
+                    <Run Text="Current text: " Foreground="{DynamicResource WindowTextReadOnly}"/>
+                    <Run FontWeight="Bold"
+                         Text="{Binding ElementName=liveSearch, Path=Text}"/>
+                </TextBlock>
+
+                <!-- SearchCommand — press Enter to trigger -->
+                <TextBlock Text="SearchCommand  (press Enter to execute)" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SearchBox x:Name="cmdSearch"
+                               Width="280" HorizontalAlignment="Left"
+                               Watermark="Enter order number and press Enter…"
+                               SearchCommand="{Binding SearchCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                               Margin="0,0,0,4"/>
+                <TextBlock Margin="0,0,0,24">
+                    <Run Text="Last search: " Foreground="{DynamicResource WindowTextReadOnly}"/>
+                    <Run x:Name="lastSearch" FontWeight="Bold" Text="—"/>
+                </TextBlock>
+
+                <!-- Disabled state -->
+                <TextBlock Text="Disabled" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SearchBox Width="280" HorizontalAlignment="Left"
+                               Text="PO-2024-00391"
+                               IsEnabled="False"
+                               Margin="0,0,0,32"/>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

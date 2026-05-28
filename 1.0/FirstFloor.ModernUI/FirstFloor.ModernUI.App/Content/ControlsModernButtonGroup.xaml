@@ -1,0 +1,101 @@
+<UserControl x:Class="FirstFloor.ModernUI.App.Content.ControlsModernButtonGroup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="500">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel HorizontalAlignment="Left" Margin="0,0,32,0">
+
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <!--  ButtonGroup                                           -->
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <TextBlock Text="BUTTONGROUP" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+                <mui:BBCodeBlock Margin="0,0,0,16"
+                    BBCode="A horizontal strip of action buttons sharing a continuous border. Corner radii are applied automatically — first item gets left-rounded corners, last item gets right-rounded corners, middle items get square corners with no redundant divider line." />
+
+                <!-- Logistics action strip -->
+                <TextBlock Text="Logistics actions" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:ButtonGroup Margin="0,0,0,4">
+                    <mui:ButtonGroupItem Content="Receive"  Click="OnActionClick"/>
+                    <mui:ButtonGroupItem Content="Ship"     Click="OnActionClick"/>
+                    <mui:ButtonGroupItem Content="Transfer" Click="OnActionClick"/>
+                    <mui:ButtonGroupItem Content="Return"   Click="OnActionClick"/>
+                </mui:ButtonGroup>
+                <TextBlock Margin="0,0,0,24">
+                    <Run Text="Last action: " Foreground="{DynamicResource WindowTextReadOnly}"/>
+                    <Run x:Name="lastAction" FontWeight="Bold" Text="—"/>
+                </TextBlock>
+
+                <!-- Two-item group -->
+                <TextBlock Text="Two items" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:ButtonGroup Margin="0,0,0,24">
+                    <mui:ButtonGroupItem Content="Import" Click="OnActionClick"/>
+                    <mui:ButtonGroupItem Content="Export" Click="OnActionClick"/>
+                </mui:ButtonGroup>
+
+                <!-- Single item (Only state — all corners rounded) -->
+                <TextBlock Text="Single item" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:ButtonGroup Margin="0,0,0,24">
+                    <mui:ButtonGroupItem Content="Print manifest" Click="OnActionClick"/>
+                </mui:ButtonGroup>
+
+                <!-- With a disabled item -->
+                <TextBlock Text="With disabled item" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:ButtonGroup Margin="0,0,0,32">
+                    <mui:ButtonGroupItem Content="Approve"  Click="OnActionClick"/>
+                    <mui:ButtonGroupItem Content="Hold"     IsEnabled="False"/>
+                    <mui:ButtonGroupItem Content="Reject"   Click="OnActionClick"/>
+                </mui:ButtonGroup>
+
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <!--  SegmentedControl                                      -->
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <TextBlock Text="SEGMENTEDCONTROL" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+                <mui:BBCodeBlock Margin="0,0,0,16"
+                    BBCode="A mutually-exclusive selection strip where exactly one segment is active at a time. The selected segment is filled with the accent colour. Ideal for view-mode toggles and status filters." />
+
+                <!-- Order status filter -->
+                <TextBlock Text="Order status filter" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SegmentedControl x:Name="statusFilter" SelectedIndex="0" Margin="0,0,0,4">
+                    <mui:SegmentedItem Content="All"/>
+                    <mui:SegmentedItem Content="Pending"/>
+                    <mui:SegmentedItem Content="Processing"/>
+                    <mui:SegmentedItem Content="Completed"/>
+                </mui:SegmentedControl>
+                <TextBlock Margin="0,0,0,24">
+                    <Run Text="Selected filter: " Foreground="{DynamicResource WindowTextReadOnly}"/>
+                    <Run FontWeight="Bold"
+                         Text="{Binding ElementName=statusFilter, Path=SelectedItem.Content}"/>
+                </TextBlock>
+
+                <!-- View mode toggle -->
+                <TextBlock Text="View mode" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SegmentedControl x:Name="viewMode" SelectedIndex="0" Margin="0,0,0,24">
+                    <mui:SegmentedItem Content="List"/>
+                    <mui:SegmentedItem Content="Grid"/>
+                    <mui:SegmentedItem Content="Map"/>
+                </mui:SegmentedControl>
+
+                <!-- Two-option toggle -->
+                <TextBlock Text="Two options" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SegmentedControl SelectedIndex="0" Margin="0,0,0,24">
+                    <mui:SegmentedItem Content="Active"/>
+                    <mui:SegmentedItem Content="Archived"/>
+                </mui:SegmentedControl>
+
+                <!-- With a disabled segment -->
+                <TextBlock Text="With disabled segment" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:SegmentedControl SelectedIndex="0" Margin="0,0,0,32">
+                    <mui:SegmentedItem Content="Standard"/>
+                    <mui:SegmentedItem Content="Express"/>
+                    <mui:SegmentedItem Content="Overnight" IsEnabled="False"/>
+                </mui:SegmentedControl>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

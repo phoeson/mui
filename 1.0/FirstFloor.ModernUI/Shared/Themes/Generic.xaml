@@ -14,6 +14,11 @@
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/ModernTab.xaml" />
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/ModernWindow.xaml" />
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/TransitioningContentControl.xaml" />
+        <!-- Phase 1 additions -->
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/ButtonGroup.xaml" />
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/SegmentedControl.xaml" />
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/NumericUpDown.xaml" />
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/SearchBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
  
 </ResourceDictionary>

@@ -16,6 +16,9 @@
                 <mui:Link DisplayName="ModernMenu" Source="/Content/ControlsModernMenu.xaml" />
                 <mui:Link DisplayName="ModernProgressRing" Source="/Content/ControlsModernProgressRing.xaml" />
                 <mui:Link DisplayName="ModernWindow" Source="/Content/ControlsModernWindow.xaml" />
+                <mui:Link DisplayName="ButtonGroup" Source="/Content/ControlsModernButtonGroup.xaml" />
+                <mui:Link DisplayName="NumericUpDown" Source="/Content/ControlsModernNumericUpDown.xaml" />
+                <mui:Link DisplayName="SearchBox" Source="/Content/ControlsModernSearchBox.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

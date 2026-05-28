@@ -1,0 +1,169 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FirstFloor.ModernUI.Windows.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         SearchBox
+         Text input with search icon, watermark, and live clear button.
+
+         Usage:
+             <mui:SearchBox Text="{Binding FilterText}"
+                            Watermark="Search items..."
+                            SearchCommand="{Binding SearchCommand}"/>
+    ═══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Internal clear-button style -->
+    <Style x:Key="SearchClearButtonStyle" TargetType="Button">
+        <Setter Property="Focusable"       Value="False"/>
+        <Setter Property="Cursor"          Value="Hand"/>
+        <Setter Property="Background"      Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding"         Value="4,0"/>
+        <Setter Property="Foreground"      Value="{DynamicResource WindowTextReadOnly}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource WindowText}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource Accent}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:SearchBox">
+        <Setter Property="FocusVisualStyle"  Value="{x:Null}"/>
+        <Setter Property="Background"        Value="{DynamicResource InputBackground}"/>
+        <Setter Property="BorderBrush"       Value="{DynamicResource InputBorder}"/>
+        <Setter Property="BorderThickness"   Value="1"/>
+        <Setter Property="Foreground"        Value="{DynamicResource InputText}"/>
+        <Setter Property="Padding"           Value="4,3"/>
+        <Setter Property="MinHeight"         Value="28"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:SearchBox">
+                    <Border x:Name="Chrome"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!-- Search icon -->
+                                <ColumnDefinition Width="Auto"/>
+                                <!-- Text + watermark -->
+                                <ColumnDefinition Width="*"/>
+                                <!-- Clear button -->
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Magnifying glass icon -->
+                            <Path Grid.Column="0"
+                                  Margin="7,0,4,0"
+                                  Width="13" Height="13"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Fill="{DynamicResource WindowTextReadOnly}"
+                                  Stretch="Uniform"
+                                  Data="M 9.5,1 C 4.8,1 1,4.8 1,9.5 C 1,14.2 4.8,18 9.5,18
+                                        C 11.4,18 13.2,17.4 14.6,16.3 L 19.3,21 C 19.7,21.4
+                                        20.4,21.4 20.8,21 C 21.2,20.6 21.2,19.9 20.8,19.5
+                                        L 16.1,14.8 C 17.2,13.4 17.9,11.5 17.9,9.5
+                                        C 18,4.8 14.2,1 9.5,1 Z
+                                        M 9.5,16 C 5.9,16 3,13.1 3,9.5 C 3,5.9 5.9,3 9.5,3
+                                        C 13.1,3 16,5.9 16,9.5 C 16,13.1 13.1,16 9.5,16 Z"/>
+
+                            <!-- Text area with overlaid watermark -->
+                            <Grid Grid.Column="1">
+                                <!-- Watermark TextBlock (shown when empty and unfocused) -->
+                                <TextBlock x:Name="WatermarkText"
+                                           Text="{TemplateBinding Watermark}"
+                                           Foreground="{DynamicResource WindowTextReadOnly}"
+                                           Padding="{TemplateBinding Padding}"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           IsHitTestVisible="False"
+                                           Visibility="Collapsed"/>
+
+                                <!-- Actual input box -->
+                                <TextBox x:Name="PART_TextBox"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         Foreground="{TemplateBinding Foreground}"
+                                         Padding="{TemplateBinding Padding}"
+                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                         FocusVisualStyle="{x:Null}"
+                                         SnapsToDevicePixels="True"/>
+                            </Grid>
+
+                            <!-- Clear (✕) button — visible only when text is non-empty -->
+                            <Button x:Name="PART_ClearButton"
+                                    Grid.Column="2"
+                                    Style="{StaticResource SearchClearButtonStyle}"
+                                    VerticalAlignment="Center"
+                                    Visibility="{Binding Text,
+                                                 RelativeSource={RelativeSource TemplatedParent},
+                                                 Converter={StaticResource NullOrEmptyStringToVisibilityConverter},
+                                                 ConverterParameter=inverse}">
+                                <!-- × symbol drawn as two short diagonal lines -->
+                                <Path Data="M 0,0 L 7,7 M 7,0 L 0,7"
+                                      Width="7" Height="7"
+                                      Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                      StrokeThickness="1.5"
+                                      StrokeEndLineCap="Round"
+                                      StrokeStartLineCap="Round"
+                                      Stretch="None"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                            </Button>
+
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <!-- Highlight outer border on hover -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Chrome" Property="BorderBrush"  Value="{DynamicResource InputBorderHover}"/>
+                            <Setter TargetName="Chrome" Property="Background"   Value="{DynamicResource InputBackgroundHover}"/>
+                        </Trigger>
+
+                        <!-- Accent border when the inner text box has focus -->
+                        <Trigger SourceName="PART_TextBox" Property="IsFocused" Value="True">
+                            <Setter TargetName="Chrome" Property="BorderBrush"  Value="{DynamicResource Accent}"/>
+                        </Trigger>
+
+                        <!-- Show watermark when Text is empty -->
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="WatermarkText" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <!-- But hide watermark again once the user starts typing -->
+                        <Trigger SourceName="PART_TextBox" Property="IsFocused" Value="True">
+                            <Setter TargetName="WatermarkText" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+
+                        <!-- Disabled state -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource InputTextDisabled}"/>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

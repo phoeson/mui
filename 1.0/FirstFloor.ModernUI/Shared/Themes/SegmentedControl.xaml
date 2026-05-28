@@ -1,0 +1,115 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FirstFloor.ModernUI.Windows.Controls">
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         SegmentedControl
+         A mutually-exclusive selection strip (think radio-button group rendered
+         as a pill).  The selected segment is filled with the accent colour.
+
+         Usage:
+             <mui:SegmentedControl SelectedIndex="0">
+                 <mui:SegmentedItem Content="All"/>
+                 <mui:SegmentedItem Content="Pending"/>
+                 <mui:SegmentedItem Content="Completed"/>
+             </mui:SegmentedControl>
+    ═══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Container: suppress the ListBox chrome entirely -->
+    <Style TargetType="controls:SegmentedControl">
+        <Setter Property="Background"                                        Value="Transparent"/>
+        <Setter Property="BorderThickness"                                   Value="0"/>
+        <Setter Property="Focusable"                                         Value="False"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"        Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility"          Value="Disabled"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:SegmentedControl">
+                    <ItemsPresenter SnapsToDevicePixels="True"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Item: position-aware, accent-filled when selected -->
+    <Style TargetType="controls:SegmentedItem">
+        <Setter Property="FocusVisualStyle"           Value="{x:Null}"/>
+        <Setter Property="Cursor"                     Value="Hand"/>
+        <Setter Property="Background"                 Value="{DynamicResource ButtonBackground}"/>
+        <Setter Property="BorderBrush"                Value="{DynamicResource ButtonBorder}"/>
+        <Setter Property="BorderThickness"            Value="1"/>
+        <Setter Property="Foreground"                 Value="{DynamicResource ButtonText}"/>
+        <Setter Property="Padding"                    Value="16,5"/>
+        <Setter Property="MinHeight"                  Value="28"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment"   Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:SegmentedItem">
+                    <Border x:Name="Chrome"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <!-- ── Position → corner radii and border sides ── -->
+                        <Trigger Property="Position" Value="Only">
+                            <Setter TargetName="Chrome" Property="CornerRadius"   Value="4"/>
+                            <Setter Property="BorderThickness"                    Value="1"/>
+                        </Trigger>
+                        <Trigger Property="Position" Value="First">
+                            <Setter TargetName="Chrome" Property="CornerRadius"   Value="4,0,0,4"/>
+                            <Setter Property="BorderThickness"                    Value="1"/>
+                        </Trigger>
+                        <Trigger Property="Position" Value="Middle">
+                            <Setter TargetName="Chrome" Property="CornerRadius"   Value="0"/>
+                            <Setter Property="BorderThickness"                    Value="0,1,1,1"/>
+                        </Trigger>
+                        <Trigger Property="Position" Value="Last">
+                            <Setter TargetName="Chrome" Property="CornerRadius"   Value="0,4,4,0"/>
+                            <Setter Property="BorderThickness"                    Value="0,1,1,1"/>
+                        </Trigger>
+
+                        <!-- ── Hover (unselected only) ── -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsSelected"  Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Chrome" Property="Background"  Value="{DynamicResource ButtonBackgroundHover}"/>
+                            <Setter TargetName="Chrome" Property="BorderBrush" Value="{DynamicResource ButtonBorderHover}"/>
+                            <Setter Property="Foreground"                       Value="{DynamicResource ButtonTextHover}"/>
+                        </MultiTrigger>
+
+                        <!-- ── Selected: accent fill ── -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Chrome" Property="Background"  Value="{DynamicResource Accent}"/>
+                            <Setter TargetName="Chrome" Property="BorderBrush" Value="{DynamicResource Accent}"/>
+                            <Setter Property="Foreground"                       Value="{DynamicResource ItemTextSelected}"/>
+                        </Trigger>
+
+                        <!-- ── Disabled ── -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource ButtonTextDisabled}"/>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

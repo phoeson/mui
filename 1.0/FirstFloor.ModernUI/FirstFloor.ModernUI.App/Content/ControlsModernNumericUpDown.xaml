@@ -1,0 +1,72 @@
+<UserControl x:Class="FirstFloor.ModernUI.App.Content.ControlsModernNumericUpDown"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="500">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel HorizontalAlignment="Left" Margin="0,0,32,0">
+
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <!--  NumericUpDown                                         -->
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <TextBlock Text="NUMERICUPDOWN" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+                <mui:BBCodeBlock Margin="0,0,0,16"
+                    BBCode="A numeric input control with ▲ / ▼ buttons for precise quantity and measurement entry. [b]Arrow keys[/b] and [b]mouse wheel[/b] (when focused) also increment and decrement the value. Commit the typed value with [b]Enter[/b] or by moving focus away." />
+
+                <!-- Default — no bounds or format applied -->
+                <TextBlock Text="Default" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:NumericUpDown x:Name="nudDefault" Width="120" HorizontalAlignment="Left" Margin="0,0,0,24"/>
+
+                <!-- Quantity — typical warehouse units (non-negative integer) -->
+                <TextBlock Text="Quantity  (Minimum=0, Step=1, StringFormat=&quot;0&quot;)"
+                           Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:NumericUpDown x:Name="nudQty"
+                                   Width="120" HorizontalAlignment="Left"
+                                   Minimum="0" Maximum="9999" Step="1" StringFormat="0"
+                                   Margin="0,0,0,4"/>
+                <TextBlock Margin="0,0,0,24">
+                    <Run Text="Value: " Foreground="{DynamicResource WindowTextReadOnly}"/>
+                    <Run FontWeight="Bold"
+                         Text="{Binding ElementName=nudQty, Path=Value, StringFormat={}{0:0}}"/>
+                </TextBlock>
+
+                <!-- Weight — decimal precision for kg / lb measurements -->
+                <TextBlock Text="Weight  (Minimum=0, Step=0.1, StringFormat=&quot;0.000&quot;)"
+                           Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:NumericUpDown x:Name="nudWeight"
+                                   Width="140" HorizontalAlignment="Left"
+                                   Minimum="0" Step="0.1" StringFormat="0.000"
+                                   Value="12.500"
+                                   Margin="0,0,0,24"/>
+
+                <!-- Pallet count — coarse step, bounded maximum -->
+                <TextBlock Text="Pallets  (Minimum=0, Maximum=500, Step=5)"
+                           Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:NumericUpDown Width="120" HorizontalAlignment="Left"
+                                   Minimum="0" Maximum="500" Step="5" StringFormat="0"
+                                   Value="10"
+                                   Margin="0,0,0,24"/>
+
+                <!-- Temperature — negative values allowed, decimal step -->
+                <TextBlock Text="Temperature  (Minimum=-40, Maximum=60, Step=0.5)"
+                           Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:NumericUpDown Width="130" HorizontalAlignment="Left"
+                                   Minimum="-40" Maximum="60" Step="0.5" StringFormat="0.0"
+                                   Value="4.0"
+                                   Margin="0,0,0,24"/>
+
+                <!-- Disabled state -->
+                <TextBlock Text="Disabled" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:NumericUpDown Width="120" HorizontalAlignment="Left"
+                                   Value="42" Minimum="0" StringFormat="0"
+                                   IsEnabled="False"
+                                   Margin="0,0,0,32"/>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
