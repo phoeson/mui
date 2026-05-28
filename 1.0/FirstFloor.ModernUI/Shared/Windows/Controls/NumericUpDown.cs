@@ -168,6 +168,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
             else if (e.Key == Key.Enter)
             {
                 CommitTextBoxValue();
+                SyncTextFromValue();
                 e.Handled = true;
             }
         }

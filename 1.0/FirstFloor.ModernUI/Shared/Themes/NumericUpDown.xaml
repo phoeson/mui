@@ -79,6 +79,7 @@
                                      Background="Transparent"
                                      BorderThickness="0"
                                      Foreground="{TemplateBinding Foreground}"
+                                     CaretBrush="{TemplateBinding Foreground}"
                                      Padding="{TemplateBinding Padding}"
                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                      HorizontalContentAlignment="Right"
