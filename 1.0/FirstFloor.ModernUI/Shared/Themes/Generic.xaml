@@ -19,6 +19,10 @@
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/SegmentedControl.xaml" />
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/NumericUpDown.xaml" />
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/SearchBox.xaml" />
+        <!-- Phase 2 additions -->
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/InfoBar.xaml" />
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/ToggleSwitch.xaml" />
+        <ResourceDictionary Source="/FirstFloor.ModernUI;component/Themes/StatusBadge.xaml" />
     </ResourceDictionary.MergedDictionaries>
  
 </ResourceDictionary>

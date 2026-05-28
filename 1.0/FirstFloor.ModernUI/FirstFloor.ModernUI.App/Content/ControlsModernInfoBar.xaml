@@ -1,0 +1,74 @@
+<UserControl x:Class="FirstFloor.ModernUI.App.Content.ControlsModernInfoBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="520">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel HorizontalAlignment="Left" Margin="0,0,32,0">
+
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <!--  InfoBar                                               -->
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <TextBlock Text="INFOBAR" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+                <mui:BBCodeBlock Margin="0,0,0,20"
+                    BBCode="An inline notification strip for scan errors, stock alerts, and process confirmations. Supports four severity levels with an optional [b]Title[/b], [b]Message[/b], and dismiss button. Set [b]IsOpen[/b] to [b]False[/b] (two-way bindable) to hide the bar."/>
+
+                <!-- Severity: Information -->
+                <TextBlock Text="Information" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:InfoBar Severity="Information"
+                             Title="Sync complete"
+                             Message="Inventory data has been refreshed from the central warehouse."
+                             IsClosable="False"
+                             Margin="0,0,0,16"/>
+
+                <!-- Severity: Success -->
+                <TextBlock Text="Success" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:InfoBar Severity="Success"
+                             Title="Order dispatched"
+                             Message="PO-2024-00391 has been shipped. Tracking ref: TRK-88451."
+                             IsClosable="False"
+                             Margin="0,0,0,16"/>
+
+                <!-- Severity: Warning -->
+                <TextBlock Text="Warning" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:InfoBar Severity="Warning"
+                             Title="Low stock"
+                             Message="SKU-4821 has fallen below the reorder threshold (qty: 12 remaining)."
+                             IsClosable="False"
+                             Margin="0,0,0,16"/>
+
+                <!-- Severity: Error -->
+                <TextBlock Text="Error" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:InfoBar Severity="Error"
+                             Title="Scan failed"
+                             Message="Barcode TRK-99102 could not be matched to any active shipment."
+                             IsClosable="False"
+                             Margin="0,0,0,16"/>
+
+                <!-- Message only (no title) -->
+                <TextBlock Text="Message only (no Title)" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:InfoBar Severity="Information"
+                             Message="Auto-save is enabled. Changes are committed every 30 seconds."
+                             IsClosable="False"
+                             Margin="0,0,0,16"/>
+
+                <!-- Dismissible with reopen button -->
+                <TextBlock Text="Dismissible  (click ✕ to dismiss, then Reopen)" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:InfoBar x:Name="dismissDemo"
+                             Severity="Warning"
+                             Title="Scheduled maintenance"
+                             Message="The warehouse system will be unavailable from 02:00–04:00 tonight."
+                             Margin="0,0,0,4"/>
+                <Button Content="Reopen"
+                        Click="OnReopenClick"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,0,32"/>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

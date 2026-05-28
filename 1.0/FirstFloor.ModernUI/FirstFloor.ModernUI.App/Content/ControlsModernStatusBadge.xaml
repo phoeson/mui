@@ -1,0 +1,76 @@
+<UserControl x:Class="FirstFloor.ModernUI.App.Content.ControlsModernStatusBadge"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="500">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel HorizontalAlignment="Left" Margin="0,0,32,0">
+
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <!--  StatusBadge                                           -->
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <TextBlock Text="STATUSBADGE" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+                <mui:BBCodeBlock Margin="0,0,0,20"
+                    BBCode="A compact pill-shaped tag for displaying order and shipment states at a glance. Set [b]Severity[/b] to one of: [b]Default[/b], [b]Information[/b], [b]Success[/b], [b]Warning[/b], or [b]Error[/b]. Content can be any string or inline element."/>
+
+                <!-- Severity variants -->
+                <TextBlock Text="Severity variants" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,8"/>
+                <WrapPanel Orientation="Horizontal" Margin="0,0,0,24">
+                    <mui:StatusBadge Margin="0,0,8,0">Default</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Information" Margin="0,0,8,0">Information</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Success"     Margin="0,0,8,0">Success</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Warning"     Margin="0,0,8,0">Warning</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Error">Error</mui:StatusBadge>
+                </WrapPanel>
+
+                <!-- Order lifecycle -->
+                <TextBlock Text="Order lifecycle" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,8"/>
+                <WrapPanel Orientation="Horizontal" Margin="0,0,0,6">
+                    <mui:StatusBadge Margin="0,0,8,6">Draft</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Information" Margin="0,0,8,6">Confirmed</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Information" Margin="0,0,8,6">Processing</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Warning"     Margin="0,0,8,6">Awaiting Stock</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Warning"     Margin="0,0,8,6">On Hold</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Success"     Margin="0,0,8,6">Dispatched</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Success"     Margin="0,0,8,6">Delivered</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Error"       Margin="0,0,8,6">Cancelled</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Error"       Margin="0,0,8,6">Failed</mui:StatusBadge>
+                </WrapPanel>
+
+                <!-- Shipment tracking -->
+                <TextBlock Text="Shipment tracking" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,8,0,8"/>
+                <WrapPanel Orientation="Horizontal" Margin="0,0,0,6">
+                    <mui:StatusBadge Severity="Information" Margin="0,0,8,6">Collected</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Information" Margin="0,0,8,6">In Transit</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Warning"     Margin="0,0,8,6">At Hub</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Warning"     Margin="0,0,8,6">Out for Delivery</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Success"     Margin="0,0,8,6">Delivered</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Error"       Margin="0,0,8,6">Return to Sender</mui:StatusBadge>
+                </WrapPanel>
+
+                <!-- Warehouse task states -->
+                <TextBlock Text="Warehouse task states" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,8,0,8"/>
+                <WrapPanel Orientation="Horizontal" Margin="0,0,0,24">
+                    <mui:StatusBadge Margin="0,0,8,6">Unassigned</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Information" Margin="0,0,8,6">Assigned</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Warning"     Margin="0,0,8,6">In Progress</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Success"     Margin="0,0,8,6">Complete</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Error"       Margin="0,0,8,6">Blocked</mui:StatusBadge>
+                </WrapPanel>
+
+                <!-- Disabled state -->
+                <TextBlock Text="Disabled" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,8"/>
+                <WrapPanel Orientation="Horizontal" Margin="0,0,0,32">
+                    <mui:StatusBadge IsEnabled="False" Margin="0,0,8,0">Default</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Success" IsEnabled="False" Margin="0,0,8,0">Success</mui:StatusBadge>
+                    <mui:StatusBadge Severity="Error"   IsEnabled="False">Error</mui:StatusBadge>
+                </WrapPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -1,0 +1,66 @@
+<UserControl x:Class="FirstFloor.ModernUI.App.Content.ControlsModernToggleSwitch"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="480">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel HorizontalAlignment="Left" Margin="0,0,32,0">
+
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <!--  ToggleSwitch                                          -->
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <TextBlock Text="TOGGLESWITCH" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+                <mui:BBCodeBlock Margin="0,0,0,20"
+                    BBCode="A sliding on/off switch for feature flags and settings. Bind [b]IsOn[/b] two-way to a boolean property. The optional [b]Header[/b] label appears above the track. [b]OnContent[/b] and [b]OffContent[/b] customise the state label shown next to the track."/>
+
+                <!-- Default -->
+                <TextBlock Text="Default" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:ToggleSwitch Margin="0,0,0,24"/>
+
+                <!-- Pre-set On -->
+                <TextBlock Text="Pre-set On" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:ToggleSwitch IsOn="True" Margin="0,0,0,24"/>
+
+                <!-- With Header -->
+                <TextBlock Text="With Header" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:ToggleSwitch Header="Auto-dispatch orders" Margin="0,0,0,24"/>
+
+                <!-- Custom state labels -->
+                <TextBlock Text="Custom OnContent / OffContent" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:ToggleSwitch Header="Strict weight validation"
+                                  OnContent="Enabled" OffContent="Disabled"
+                                  Margin="0,0,0,8"/>
+                <mui:ToggleSwitch Header="Barcode scanner"
+                                  OnContent="Active" OffContent="Inactive"
+                                  IsOn="True"
+                                  Margin="0,0,0,24"/>
+
+                <!-- Live binding -->
+                <TextBlock Text="Live IsOn binding" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:ToggleSwitch x:Name="liveSwitch"
+                                  Header="Night mode"
+                                  Margin="0,0,0,4"/>
+                <TextBlock Margin="0,0,0,24">
+                    <Run Text="IsOn = " Foreground="{DynamicResource WindowTextReadOnly}"/>
+                    <Run FontWeight="Bold"
+                         Text="{Binding ElementName=liveSwitch, Path=IsOn}"/>
+                </TextBlock>
+
+                <!-- Disabled states -->
+                <TextBlock Text="Disabled" Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,4"/>
+                <mui:ToggleSwitch Header="GPS tracking (no license)"
+                                  IsEnabled="False"
+                                  Margin="0,0,0,8"/>
+                <mui:ToggleSwitch Header="Archive mode (locked)"
+                                  IsOn="True"
+                                  IsEnabled="False"
+                                  Margin="0,0,0,32"/>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

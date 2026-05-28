@@ -19,6 +19,9 @@
                 <mui:Link DisplayName="ButtonGroup" Source="/Content/ControlsModernButtonGroup.xaml" />
                 <mui:Link DisplayName="NumericUpDown" Source="/Content/ControlsModernNumericUpDown.xaml" />
                 <mui:Link DisplayName="SearchBox" Source="/Content/ControlsModernSearchBox.xaml" />
+                <mui:Link DisplayName="InfoBar" Source="/Content/ControlsModernInfoBar.xaml" />
+                <mui:Link DisplayName="ToggleSwitch" Source="/Content/ControlsModernToggleSwitch.xaml" />
+                <mui:Link DisplayName="StatusBadge" Source="/Content/ControlsModernStatusBadge.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

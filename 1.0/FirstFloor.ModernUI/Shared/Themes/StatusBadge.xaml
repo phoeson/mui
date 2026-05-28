@@ -1,0 +1,70 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FirstFloor.ModernUI.Windows.Controls">
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         StatusBadge
+         A small pill-shaped tag for displaying order / shipment status.
+         Colour-coded by severity level.
+
+         Usage:
+             <mui:StatusBadge Severity="Success">Delivered</mui:StatusBadge>
+             <mui:StatusBadge Severity="Warning">Pending</mui:StatusBadge>
+             <mui:StatusBadge Severity="Error">Cancelled</mui:StatusBadge>
+    ═══════════════════════════════════════════════════════════════════════ -->
+
+    <Style TargetType="controls:StatusBadge">
+        <Setter Property="FocusVisualStyle"      Value="{x:Null}"/>
+        <Setter Property="FontSize"              Value="11"/>
+        <Setter Property="FontWeight"            Value="SemiBold"/>
+        <Setter Property="Padding"               Value="8,3"/>
+        <Setter Property="Foreground"            Value="{DynamicResource WindowTextReadOnly}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment"   Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:StatusBadge">
+                    <Border x:Name="Chrome"
+                            Background="#26717171"
+                            BorderBrush="#4D717171"
+                            BorderThickness="1"
+                            CornerRadius="3"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          TextBlock.FontSize="{TemplateBinding FontSize}"
+                                          TextBlock.FontWeight="{TemplateBinding FontWeight}"
+                                          TextBlock.Foreground="{TemplateBinding Foreground}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Severity" Value="Information">
+                            <Setter TargetName="Chrome" Property="Background"   Value="#1A0078D4"/>
+                            <Setter TargetName="Chrome" Property="BorderBrush"  Value="#660078D4"/>
+                            <Setter Property="Foreground"                        Value="#5BB5FF"/>
+                        </Trigger>
+                        <Trigger Property="Severity" Value="Success">
+                            <Setter TargetName="Chrome" Property="Background"   Value="#1A107C10"/>
+                            <Setter TargetName="Chrome" Property="BorderBrush"  Value="#66107C10"/>
+                            <Setter Property="Foreground"                        Value="#54C464"/>
+                        </Trigger>
+                        <Trigger Property="Severity" Value="Warning">
+                            <Setter TargetName="Chrome" Property="Background"   Value="#1AF0A000"/>
+                            <Setter TargetName="Chrome" Property="BorderBrush"  Value="#66F0A000"/>
+                            <Setter Property="Foreground"                        Value="#F0C840"/>
+                        </Trigger>
+                        <Trigger Property="Severity" Value="Error">
+                            <Setter TargetName="Chrome" Property="Background"   Value="#1AE81123"/>
+                            <Setter TargetName="Chrome" Property="BorderBrush"  Value="#66E81123"/>
+                            <Setter Property="Foreground"                        Value="#FF7070"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
