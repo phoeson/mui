@@ -28,6 +28,8 @@
         <ResourceDictionary Source="ToolTip.xaml" />
         <ResourceDictionary Source="TreeView.xaml" />
         <ResourceDictionary Source="Expander.xaml" />
+        <ResourceDictionary Source="GroupBox.xaml" />
+        <ResourceDictionary Source="Card.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- default accent colors and brushes -->

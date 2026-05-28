@@ -1,0 +1,119 @@
+<UserControl x:Class="FirstFloor.ModernUI.App.Content.ControlsStylesContainers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="900" d:DesignWidth="560">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel HorizontalAlignment="Left" MinWidth="320" Margin="0,0,32,0">
+
+                <!-- ══════════════════════════════════════════════ -->
+                <!--  Expander                                      -->
+                <!-- ══════════════════════════════════════════════ -->
+                <TextBlock Text="EXPANDER" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+                <TextBlock Text="Expands and collapses a content region. Click the header to toggle." Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,16" TextWrapping="Wrap"/>
+
+                <Expander Header="Order Details" IsExpanded="True" Margin="0,0,0,0">
+                    <StackPanel Margin="0,6,0,12">
+                        <TextBlock Text="Order #WH-2024-0847" Margin="0,0,0,2"/>
+                        <TextBlock Text="Customer: Acme Logistics Ltd" Margin="0,0,0,2"/>
+                        <TextBlock Text="Status: Processing" Foreground="{DynamicResource WindowTextReadOnly}"/>
+                    </StackPanel>
+                </Expander>
+
+                <Expander Header="Shipment Information" Margin="0,0,0,0">
+                    <StackPanel Margin="0,6,0,12">
+                        <TextBlock Text="Carrier: FastFreight Express" Margin="0,0,0,2"/>
+                        <TextBlock Text="Tracking: FF-9921-AB3C" Margin="0,0,0,2"/>
+                        <TextBlock Text="ETA: 2026-06-01" Foreground="{DynamicResource WindowTextReadOnly}"/>
+                    </StackPanel>
+                </Expander>
+
+                <Expander Header="Customs &amp; Compliance" Margin="0,0,0,0">
+                    <StackPanel Margin="0,6,0,12">
+                        <TextBlock Text="HS Code: 8471.30" Margin="0,0,0,2"/>
+                        <TextBlock Text="Country of Origin: DE" Margin="0,0,0,2"/>
+                        <TextBlock Text="Declared Value: €1,240.00" Foreground="{DynamicResource WindowTextReadOnly}"/>
+                    </StackPanel>
+                </Expander>
+
+                <Expander Header="Disabled expander" IsEnabled="False" Margin="0,0,0,28"/>
+
+                <!-- ══════════════════════════════════════════════ -->
+                <!--  GroupBox                                      -->
+                <!-- ══════════════════════════════════════════════ -->
+                <TextBlock Text="GROUPBOX" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+                <TextBlock Text="Groups related controls under a labelled section. Set Header to the section label." Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,16" TextWrapping="Wrap"/>
+
+                <GroupBox Header="Warehouse Location" Margin="0,0,0,16" Width="260" HorizontalAlignment="Left">
+                    <StackPanel>
+                        <TextBlock Text="Zone:   B"  Margin="0,0,0,4"/>
+                        <TextBlock Text="Aisle:  04" Margin="0,0,0,4"/>
+                        <TextBlock Text="Bay:    12" Margin="0,0,0,4"/>
+                        <TextBlock Text="Shelf:  C" Foreground="{DynamicResource WindowTextReadOnly}"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- GroupBox with a rich Header -->
+                <GroupBox Width="260" HorizontalAlignment="Left" Margin="0,0,0,28">
+                    <GroupBox.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Active Filters" VerticalAlignment="Center"/>
+                            <TextBlock Text=" (3)" Foreground="{DynamicResource Accent}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </GroupBox.Header>
+                    <StackPanel>
+                        <CheckBox Content="In-stock only"       IsChecked="True"  Margin="0,0,0,4"/>
+                        <CheckBox Content="Pending dispatch"    IsChecked="True"  Margin="0,0,0,4"/>
+                        <CheckBox Content="High priority"       IsChecked="True"  Margin="0,0,0,4"/>
+                        <CheckBox Content="Requires cold chain"                   Margin="0,0,0,0"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- ══════════════════════════════════════════════ -->
+                <!--  Card                                          -->
+                <!-- ══════════════════════════════════════════════ -->
+                <TextBlock Text="CARD" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+                <TextBlock Text="A bordered surface for grouping content. Apply Style=&quot;{StaticResource Card}&quot; to a Border. Use CardTitle and CardDescription for inner typography." Foreground="{DynamicResource WindowTextReadOnly}" Margin="0,0,0,16" TextWrapping="Wrap"/>
+
+                <WrapPanel Margin="0,0,0,28">
+                    <Border Style="{StaticResource Card}" Width="180" Margin="0,0,12,12">
+                        <StackPanel>
+                            <TextBlock Text="Pending Orders" Style="{StaticResource CardTitle}"/>
+                            <TextBlock Text="47"
+                                       FontSize="28" FontWeight="Bold"
+                                       Foreground="{DynamicResource WindowText}"
+                                       Margin="0,0,0,4"/>
+                            <TextBlock Text="Awaiting warehouse pick" Style="{StaticResource CardDescription}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource Card}" Width="180" Margin="0,0,12,12">
+                        <StackPanel>
+                            <TextBlock Text="Dispatched Today" Style="{StaticResource CardTitle}"/>
+                            <TextBlock Text="132"
+                                       FontSize="28" FontWeight="Bold"
+                                       Foreground="{DynamicResource Accent}"
+                                       Margin="0,0,0,4"/>
+                            <TextBlock Text="Shipments left the warehouse" Style="{StaticResource CardDescription}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource AccentCard}" Width="180" Margin="0,0,0,12">
+                        <StackPanel>
+                            <TextBlock Text="Exceptions" Style="{StaticResource CardTitle}"/>
+                            <TextBlock Text="3"
+                                       FontSize="28" FontWeight="Bold"
+                                       Foreground="{DynamicResource Accent}"
+                                       Margin="0,0,0,4"/>
+                            <TextBlock Text="Require manual review" Style="{StaticResource CardDescription}"/>
+                        </StackPanel>
+                    </Border>
+                </WrapPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -17,6 +17,7 @@
                 <mui:Link DisplayName="Slider" Source="/Content/ControlsStylesSlider.xaml"/>
                 <mui:Link DisplayName="Text" Source="/Content/ControlsStylesText.xaml" />
                 <mui:Link DisplayName="Sample form" Source="/Content/ControlsStylesSampleForm.xaml" />
+                <mui:Link DisplayName="Containers" Source="/Content/ControlsStylesContainers.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>
