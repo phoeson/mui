@@ -4,8 +4,8 @@
 
     <!-- ═══════════════════════════════════════════════════════════════════════
          StatusBadge
-         A small pill-shaped tag for displaying order / shipment status.
-         Colour-coded by severity level.
+         A compact pill-shaped tag for displaying order / shipment status.
+         Solid background with high-contrast white (or dark-on-amber) text.
 
          Usage:
              <mui:StatusBadge Severity="Success">Delivered</mui:StatusBadge>
@@ -14,21 +14,22 @@
     ═══════════════════════════════════════════════════════════════════════ -->
 
     <Style TargetType="controls:StatusBadge">
-        <Setter Property="FocusVisualStyle"      Value="{x:Null}"/>
-        <Setter Property="FontSize"              Value="11"/>
-        <Setter Property="FontWeight"            Value="SemiBold"/>
-        <Setter Property="Padding"               Value="8,3"/>
-        <Setter Property="Foreground"            Value="{DynamicResource WindowTextReadOnly}"/>
+        <Setter Property="FocusVisualStyle"           Value="{x:Null}"/>
+        <Setter Property="FontSize"                   Value="11"/>
+        <Setter Property="FontWeight"                 Value="SemiBold"/>
+        <Setter Property="Padding"                    Value="8,3"/>
+        <!-- Default (neutral grey) foreground — white on grey -->
+        <Setter Property="Foreground"                 Value="#FFFFFF"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment"   Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:StatusBadge">
+                    <!-- Default: neutral grey pill -->
                     <Border x:Name="Chrome"
-                            Background="#26717171"
-                            BorderBrush="#4D717171"
-                            BorderThickness="1"
-                            CornerRadius="3"
+                            Background="#6E767D"
+                            BorderThickness="0"
+                            CornerRadius="10"
                             Padding="{TemplateBinding Padding}"
                             SnapsToDevicePixels="True">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -38,29 +39,35 @@
                                           TextBlock.Foreground="{TemplateBinding Foreground}"/>
                     </Border>
                     <ControlTemplate.Triggers>
+
+                        <!-- Information — Microsoft blue, white text -->
                         <Trigger Property="Severity" Value="Information">
-                            <Setter TargetName="Chrome" Property="Background"   Value="#1A0078D4"/>
-                            <Setter TargetName="Chrome" Property="BorderBrush"  Value="#660078D4"/>
-                            <Setter Property="Foreground"                        Value="#5BB5FF"/>
+                            <Setter TargetName="Chrome" Property="Background" Value="#0078D4"/>
+                            <Setter Property="Foreground"                      Value="#FFFFFF"/>
                         </Trigger>
+
+                        <!-- Success — Microsoft green, white text -->
                         <Trigger Property="Severity" Value="Success">
-                            <Setter TargetName="Chrome" Property="Background"   Value="#1A107C10"/>
-                            <Setter TargetName="Chrome" Property="BorderBrush"  Value="#66107C10"/>
-                            <Setter Property="Foreground"                        Value="#54C464"/>
+                            <Setter TargetName="Chrome" Property="Background" Value="#107C10"/>
+                            <Setter Property="Foreground"                      Value="#FFFFFF"/>
                         </Trigger>
+
+                        <!-- Warning — amber; amber is high-luminance so use dark text -->
                         <Trigger Property="Severity" Value="Warning">
-                            <Setter TargetName="Chrome" Property="Background"   Value="#1AF0A000"/>
-                            <Setter TargetName="Chrome" Property="BorderBrush"  Value="#66F0A000"/>
-                            <Setter Property="Foreground"                        Value="#F0C840"/>
+                            <Setter TargetName="Chrome" Property="Background" Value="#F0A000"/>
+                            <Setter Property="Foreground"                      Value="#1A1A1A"/>
                         </Trigger>
+
+                        <!-- Error — Microsoft red, white text -->
                         <Trigger Property="Severity" Value="Error">
-                            <Setter TargetName="Chrome" Property="Background"   Value="#1AE81123"/>
-                            <Setter TargetName="Chrome" Property="BorderBrush"  Value="#66E81123"/>
-                            <Setter Property="Foreground"                        Value="#FF7070"/>
+                            <Setter TargetName="Chrome" Property="Background" Value="#E81123"/>
+                            <Setter Property="Foreground"                      Value="#FFFFFF"/>
                         </Trigger>
+
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.5"/>
                         </Trigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
