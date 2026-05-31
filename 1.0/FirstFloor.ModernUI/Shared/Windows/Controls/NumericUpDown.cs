@@ -66,7 +66,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
                 "Step",
                 typeof(decimal),
                 typeof(NumericUpDown),
-                new PropertyMetadata(1m));
+                new PropertyMetadata(1m, null, CoerceStep));
 
         /// <summary>Identifies the <see cref="StringFormat"/> dependency property.</summary>
         public static readonly DependencyProperty StringFormatProperty =
@@ -112,6 +112,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
             {
                 textBox.LostFocus      -= OnTextBoxLostFocus;
                 textBox.PreviewKeyDown -= OnTextBoxPreviewKeyDown;
+                DataObject.RemovePastingHandler(textBox, OnPasteFilter);
             }
             if (increaseButton != null) increaseButton.Click -= OnIncreaseClick;
             if (decreaseButton != null) decreaseButton.Click -= OnDecreaseClick;
@@ -126,6 +127,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
             {
                 textBox.LostFocus      += OnTextBoxLostFocus;
                 textBox.PreviewKeyDown += OnTextBoxPreviewKeyDown;
+                DataObject.AddPastingHandler(textBox, OnPasteFilter);
                 SyncTextFromValue();
             }
             if (increaseButton != null) increaseButton.Click += OnIncreaseClick;
@@ -178,6 +180,16 @@ namespace FirstFloor.ModernUI.Windows.Controls
             CommitTextBoxValue();
             // Reformat to canonical string (e.g. "5." → "5")
             SyncTextFromValue();
+        }
+
+        private void OnPasteFilter(object sender, DataObjectPastingEventArgs e)
+        {
+            var text = e.DataObject.GetDataPresent(typeof(string))
+                ? e.DataObject.GetData(typeof(string)) as string
+                : null;
+            decimal dummy;
+            if (text == null || !decimal.TryParse(text, out dummy))
+                e.CancelCommand();
         }
 
         // ── Value helpers ─────────────────────────────────────────────────────
@@ -234,6 +246,12 @@ namespace FirstFloor.ModernUI.Windows.Controls
             if (val < ctrl.Minimum) return ctrl.Minimum;
             if (val > ctrl.Maximum) return ctrl.Maximum;
             return val;
+        }
+
+        private static object CoerceStep(DependencyObject d, object baseValue)
+        {
+            var step = (decimal)baseValue;
+            return step > 0m ? step : 1m;
         }
 
         private static void OnMinimumChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
