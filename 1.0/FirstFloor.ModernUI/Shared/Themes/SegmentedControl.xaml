@@ -20,7 +20,7 @@
         <Setter Property="Background"                                        Value="Transparent"/>
         <Setter Property="BorderThickness"                                   Value="0"/>
         <Setter Property="Focusable"                                         Value="False"/>
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"        Value="Disabled"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"        Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility"          Value="Disabled"/>
         <Setter Property="ItemsPanel">
             <Setter.Value>
@@ -32,7 +32,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:SegmentedControl">
-                    <ItemsPresenter SnapsToDevicePixels="True"/>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Disabled"
+                                  Focusable="False">
+                        <ItemsPresenter SnapsToDevicePixels="True"/>
+                    </ScrollViewer>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -104,6 +108,11 @@
                         <!-- ── Disabled ── -->
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{DynamicResource ButtonTextDisabled}"/>
+                        </Trigger>
+
+                        <!-- ── Keyboard focus ring ── -->
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Chrome" Property="BorderBrush" Value="{DynamicResource Accent}"/>
                         </Trigger>
 
                     </ControlTemplate.Triggers>
