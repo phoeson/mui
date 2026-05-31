@@ -129,7 +129,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
         /// <summary>Identifies the <see cref="CurrentStep"/> dependency property.</summary>
         public static readonly DependencyProperty CurrentStepProperty =
             DependencyProperty.Register("CurrentStep", typeof(int), typeof(StepIndicator),
-                new PropertyMetadata(0, OnCurrentStepChanged));
+                new PropertyMetadata(0, OnCurrentStepChanged, CoerceCurrentStep));
 
         // ── Constructor ──────────────────────────────────────────────────────
 
@@ -178,6 +178,16 @@ namespace FirstFloor.ModernUI.Windows.Controls
         private static void OnCurrentStepChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((StepIndicator)d).UpdateAllSteps();
+        }
+
+        private static object CoerceCurrentStep(DependencyObject d, object baseValue)
+        {
+            var ctrl = (StepIndicator)d;
+            var step = (int)baseValue;
+            if (step < 0) return 0;
+            int max = ctrl.Items.Count - 1;
+            // Don't clamp before items are loaded (max == -1)
+            return max >= 0 && step > max ? max : step;
         }
 
         // ── Helpers ───────────────────────────────────────────────────────────
