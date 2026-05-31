@@ -51,8 +51,9 @@
 
     <!-- CommandBarButton — stacked icon + label, flat hover style -->
     <Style TargetType="controls:CommandBarButton">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="Cursor"           Value="Hand"/>
+        <Setter Property="FocusVisualStyle"        Value="{x:Null}"/>
+        <Setter Property="AutomationProperties.Name" Value="{Binding Label, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="Cursor"                  Value="Hand"/>
         <Setter Property="Background"       Value="Transparent"/>
         <Setter Property="BorderThickness"  Value="0"/>
         <Setter Property="Foreground"       Value="{DynamicResource ButtonText}"/>
@@ -65,6 +66,7 @@
                             Background="{TemplateBinding Background}"
                             CornerRadius="3"
                             Padding="{TemplateBinding Padding}"
+                            ToolTip="{TemplateBinding Label}"
                             SnapsToDevicePixels="True">
                         <StackPanel HorizontalAlignment="Center">
                             <!-- Icon (16×16 slot) -->
@@ -96,6 +98,10 @@
                         </Trigger>
                         <Trigger Property="IsCompact" Value="True">
                             <Setter TargetName="LabelText" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Chrome" Property="BorderThickness" Value="1"/>
+                            <Setter TargetName="Chrome" Property="BorderBrush"     Value="{DynamicResource Accent}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
