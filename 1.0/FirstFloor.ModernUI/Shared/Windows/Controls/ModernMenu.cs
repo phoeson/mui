@@ -84,6 +84,8 @@ namespace FirstFloor.ModernUI.Windows.Controls
             this.previewLingerTimer = new DispatcherTimer();
             this.previewLingerTimer.Tick += OnPreviewLingerTimerTick;
 
+            this.IsVisibleChanged += OnIsVisibleChanged;
+
             // create a default link groups collection
             SetCurrentValue(LinkGroupsProperty, new LinkGroupCollection());
         }
@@ -135,6 +137,14 @@ namespace FirstFloor.ModernUI.Windows.Controls
         {
             this.previewLingerTimer.Stop();
             HoveredLinkGroup = null;
+        }
+
+        private void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(bool)e.NewValue) {
+                this.previewLingerTimer.Stop();
+                HoveredLinkGroup = null;
+            }
         }
 
         private void OnSubListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
