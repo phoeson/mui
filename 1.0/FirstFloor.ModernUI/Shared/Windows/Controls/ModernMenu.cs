@@ -139,6 +139,12 @@ namespace FirstFloor.ModernUI.Windows.Controls
             HoveredLinkGroup = null;
         }
 
+        private void ClearPreview()
+        {
+            this.previewLingerTimer.Stop();
+            HoveredLinkGroup = null;
+        }
+
         private void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (!(bool)e.NewValue) {
@@ -379,6 +385,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
 
         private void RebuildMenu(LinkGroupCollection groups)
         {
+            ClearPreview();
             this.groupMap.Clear();
             if (groups != null) {
                 // fill the group map based on group key
@@ -446,7 +453,10 @@ namespace FirstFloor.ModernUI.Windows.Controls
             }
 
             this.isSelecting = true;
-            // update selection
+            // update selection — clear preview when the visible group set changes
+            if (VisibleLinkGroups != groups) {
+                ClearPreview();
+            }
             SetValue(VisibleLinkGroupsPropertyKey, groups);
             SetCurrentValue(SelectedLinkGroupProperty, selectedGroup);
             SetCurrentValue(SelectedLinkProperty, selectedLink);
