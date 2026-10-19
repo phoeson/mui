@@ -285,6 +285,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Controls\TransitioningContentControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Converters\BooleanToFontWeightConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Converters\EqualityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Converters\NullOrEmptyStringToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Converters\ToLowerConverter.cs" />

@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -58,7 +57,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
 
         private static readonly DependencyPropertyKey PreviewLinkGroupPropertyKey = DependencyProperty.RegisterReadOnly("PreviewLinkGroup", typeof(LinkGroup), typeof(ModernMenu), null);
         /// <summary>
-        /// Defines the PreviewLinkGroup dependency property. Returns HoveredLinkGroup when hovering, otherwise SelectedLinkGroup.
+        /// Defines the PreviewLinkGroup dependency property. Returns HoveredLinkGroup when a group was clicked, otherwise SelectedLinkGroup.
         /// </summary>
         public static readonly DependencyProperty PreviewLinkGroupProperty = PreviewLinkGroupPropertyKey.DependencyProperty;
 
@@ -96,7 +95,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
             base.OnApplyTemplate();
 
             if (this.groupListBox != null) {
-                this.groupListBox.ItemContainerGenerator.StatusChanged -= OnGroupListBoxGeneratorStatusChanged;
+                this.groupListBox.PreviewMouseLeftButtonDown -= OnGroupListBoxPreviewMouseLeftButtonDown;
             }
 
             if (this.subListBox != null) {
@@ -107,8 +106,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
             this.subListBox = GetTemplateChild(PartSubListBox) as ListBox;
 
             if (this.groupListBox != null) {
-                this.groupListBox.ItemContainerGenerator.StatusChanged += OnGroupListBoxGeneratorStatusChanged;
-                WireGroupItemMouseEvents();
+                this.groupListBox.PreviewMouseLeftButtonDown += OnGroupListBoxPreviewMouseLeftButtonDown;
             }
 
             if (this.subListBox != null) {
@@ -171,28 +169,17 @@ namespace FirstFloor.ModernUI.Windows.Controls
             this.isUpdatingSubSelection = false;
         }
 
-        private void OnGroupListBoxGeneratorStatusChanged(object sender, EventArgs e)
+        private void OnGroupListBoxPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            WireGroupItemMouseEvents();
-        }
+            var container = ItemsControl.ContainerFromElement(this.groupListBox, (DependencyObject)e.OriginalSource) as ListBoxItem;
+            var group = container?.Content as LinkGroup;
+            if (group == null) return;
 
-        private void WireGroupItemMouseEvents()
-        {
-            if (this.groupListBox == null || this.groupListBox.ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated) {
-                return;
-            }
-
-            foreach (var item in this.groupListBox.Items) {
-                var container = this.groupListBox.ItemContainerGenerator.ContainerFromItem(item) as ListBoxItem;
-                if (container == null) continue;
-                container.MouseEnter -= OnGroupItemMouseEnter;
-                container.MouseEnter += OnGroupItemMouseEnter;
-            }
-        }
-
-        private void OnGroupItemMouseEnter(object sender, MouseEventArgs e)
-        {
-            HoveredLinkGroup = ((ListBoxItem)sender).Content as LinkGroup;
+            // clicking a group previews its sub-links only; navigation happens when a sub-link is clicked.
+            // handling the preview event suppresses the ListBoxItem selection (and thus navigation)
+            e.Handled = true;
+            this.previewLingerTimer.Stop();
+            HoveredLinkGroup = group == SelectedLinkGroup ? null : group;
         }
 
         private static void OnHoveredLinkGroupChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
@@ -339,7 +326,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
         }
 
         /// <summary>
-        /// Gets or sets the link group currently under the mouse pointer.
+        /// Gets or sets the link group being previewed, set when a main menu item is clicked.
         /// </summary>
         public LinkGroup HoveredLinkGroup
         {
@@ -357,7 +344,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
         }
 
         /// <summary>
-        /// Gets the link group whose sub-links are currently previewed. Returns HoveredLinkGroup when hovering, otherwise SelectedLinkGroup.
+        /// Gets the link group whose sub-links are currently previewed. Returns HoveredLinkGroup when a group was clicked, otherwise SelectedLinkGroup.
         /// </summary>
         public LinkGroup PreviewLinkGroup
         {

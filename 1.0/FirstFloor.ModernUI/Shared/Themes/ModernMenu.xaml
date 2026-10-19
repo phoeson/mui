@@ -53,6 +53,16 @@
                                                         <Setter Property="Foreground" Value="{DynamicResource MenuTextHover}"/>
                                                         <Setter Property="Cursor" Value="Hand"/>
                                                     </Trigger>
+                                                    <!-- highlight the group whose sub-links are being previewed -->
+                                                    <DataTrigger Value="True">
+                                                        <DataTrigger.Binding>
+                                                            <MultiBinding Converter="{StaticResource EqualityConverter}">
+                                                                <Binding />
+                                                                <Binding Path="PreviewLinkGroup" RelativeSource="{RelativeSource AncestorType=controls:ModernMenu}" />
+                                                            </MultiBinding>
+                                                        </DataTrigger.Binding>
+                                                        <Setter Property="Foreground" Value="{DynamicResource MenuTextHover}"/>
+                                                    </DataTrigger>
                                                     <Trigger Property="IsSelected" Value="true">
                                                         <Setter Property="Foreground" Value="{DynamicResource MenuTextSelected}"/>
                                                     </Trigger>
