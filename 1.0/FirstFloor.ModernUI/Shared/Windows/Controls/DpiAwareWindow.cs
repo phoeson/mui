@@ -21,7 +21,7 @@ namespace FirstFloor.ModernUI.Windows.Controls
         /// <summary>
         /// Occurs when the system or monitor DPI for this window has changed.
         /// </summary>
-        public event EventHandler DpiChanged;
+        public new event EventHandler DpiChanged;
 
         private HwndSource source;
         private DpiInformation dpiInfo;
@@ -35,7 +35,9 @@ namespace FirstFloor.ModernUI.Windows.Controls
             this.SourceInitialized += OnSourceInitialized;
 
             // WM_DPICHANGED is not send when window is minimized, do listen to global display setting changes
+#pragma warning disable CA1416
             SystemEvents.DisplaySettingsChanged += OnSystemEventsDisplaySettingsChanged;
+#pragma warning restore CA1416
 
             // try to set per-monitor dpi awareness, before the window is displayed
             this.isPerMonitorDpiAware = ModernUIHelper.TrySetPerMonitorDpiAware();
@@ -61,7 +63,9 @@ namespace FirstFloor.ModernUI.Windows.Controls
             base.OnClosed(e);
 
             // detach global event handlers
+#pragma warning disable CA1416
             SystemEvents.DisplaySettingsChanged -= OnSystemEventsDisplaySettingsChanged;
+#pragma warning restore CA1416
         }
 
         private void OnSystemEventsDisplaySettingsChanged(object sender, EventArgs e)
