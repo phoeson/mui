@@ -11,7 +11,7 @@
 				<Platform>Any CPU</Platform>
 
 				<MSBuildExtensions>$(BinariesDir)\MSBuild.Community.Tasks.dll</MSBuildExtensions>
-				<NuGetApp>NuGet.exe</NuGetApp>
+				<NuGetApp>$(BaseDir)\Build\NuGet.exe</NuGetApp>
 
 				<NuSpecFile>$(MSBuildProjectDirectory)\ModernUI.WPF.nuspec</NuSpecFile>
 				<SolutionFile>$(BaseDir)\FirstFloor.ModernUI.sln</SolutionFile>
